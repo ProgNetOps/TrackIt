@@ -1,0 +1,93 @@
+﻿@model TicketCreateViewModel
+
+
+<div class="row">
+    <form method="post" asp-action="CreateService" class="mt-3 p-sm-5">
+        <div class="glass-pane p-5">
+            <div class="row p-md-5" >
+                <div class="col-lg-4 col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="ClientId" class="custom-control-label text-white"></label>
+                        <select asp-for="ClientId" class="form-control form-select" style="font-size:1.5rem;" asp-items="@ViewBag.Clients">
+                            <option disabled selected value="">Select Client's Name</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="ClientId"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="CircuitId" class="custom-control-label text-white"></label>
+                        <select asp-for="CircuitId" class="form-control form-select" style="font-size:1.5rem;" asp-items="@ViewBag.Circuits">
+                            <option disabled selected value="">Select Service</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="CircuitId"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="TicketTypeId" class="custom-control-label text-white"></label>
+                        <select asp-for="TicketTypeId" class="form-control form-select" style="font-size:1.5rem;" asp-items="@ViewBag.TicketTypes" >
+                            <option disabled selected value="">Ticket Type</option>
+
+                        </select>
+                        <span class="text-danger" asp-validation-for="TicketTypeId"></span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="form-group mb-3">
+                        <label asp-for="TicketStatusId" class="custom-control-label text-white"></label>
+                        <select asp-for="TicketStatusId" class="form-control form-select" style="font-size:1.5rem;" asp-items="@ViewBag.TicketStatuses">
+                            <option disabled selected value="">Ticket Status </option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="TicketStatusId"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="TicketPriorityId" class="custom-control-label text-white"></label>
+                        <select asp-for="TicketPriorityId" class="form-control form-select" style="font-size:1.5rem;" asp-items="@ViewBag.TicketPriorities">
+                            <option disabled selected value="">Select Priority</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="TicketPriorityId"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="LoggedAt" class="custom-control-label text-white"></label>
+                        <input asp-for="LoggedAt" class="form-control" readonly style="font-size:1.5rem;" value="@DateTime.Now">
+                        <span class="text-danger" asp-validation-for="LoggedAt"></span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+
+
+                    <div class="form-group mb-3">
+                        <label asp-for="IssueTitle" class="custom-control-label text-white"></label>
+                        <input asp-for="IssueTitle" class="form-control" style="font-size:1.5rem;" >
+                        <span class="text-danger" asp-validation-for="IssueTitle"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ShortDescription" class="custom-control-label text-white"></label>
+                        <textarea asp-for="ShortDescription" class="form-control" style="font-size:1.5rem;" ></textarea>
+                        <span class="text-danger" asp-validation-for="ShortDescription"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="FullDescription" class="custom-control-label text-white"></label>
+                        <Textarea asp-for="FullDescription" class="form-control" style="font-size:1.5rem;" ></Textarea>
+                        <span class="text-danger" asp-validation-for="FullDescription"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="TicketAging" class="custom-control-label text-white"></label>
+                        <input asp-for="TicketAging" class="form-control" style="font-size:1.5rem;" >
+                        <span class="text-danger" asp-validation-for="TicketAging"></span>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="form-group row text-center m-5">
+                <div class=" col-4 offset-4" style="position:relative;">
+                    <button type="submit" class="shinyButton">Create Ticket</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</div>

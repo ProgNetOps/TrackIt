@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BTS>
+
+@{
+    Layout = "_EmptyLayout";
+    int serial = 0;
+}
+
+
+<section class="content-container">
+
+    <article>
+
+
+        @if (!Model.Any())
+        {
+            <p class="text-center">No result</p>
+        }
+
+        else
+        {
+
+            <div class="table-container">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>BTS</th>
+                            <th>Address</th>
+                            <th>Coordinates</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var site in Model)
+                        {
+                            serial += 1;
+                            <tr>
+                                <td data-label="S/N">@serial</td>
+                                <td data-label="BTS">@site.BTSName</td>
+                                <td data-label="Address">@site.LocationAddress</td>
+                                <td data-label="Coordinates">@site.Coordinates</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+
+
+    </article>
+
+
+</section>
+

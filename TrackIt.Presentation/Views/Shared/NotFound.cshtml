@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Not Found";
+}
+<div style=" width:100%; height:auto;" class="p-5">
+    <div class="glass-pane p-5" style"height:40vh; display:flex; align-items:center; justify-content:center;">
+        <h2 style="text-align:center;font-size:5vw; color:#f00;">
+            @ViewBag.ErrorMessage
+        </h2>
+    </div>
+
+    <div class="text-center">
+        <a asp-controller="Home" asp-action="Welcome">
+            Back to home page
+        </a>
+    </div>
+</div>   

@@ -1,0 +1,106 @@
+﻿@model PagedList<Circuit>
+
+
+@{
+    string previousButtonDisabled = Model.HasPreviousPage ? string.Empty : "disabled";
+    string nextButtonDisabled = Model.HasNextPage ? string.Empty : "disabled";
+    string summary = $"Page {Model.PageIndex} of {Model.TotalNumberOfPages}: {ViewBag.TotalCount} results";
+}
+
+<section  style="background-color: transparent;">
+    
+    <form method="get" asp-controller="Circuit">
+        <div class=" p-2 mb-2 container" id="search-bar">
+
+        <div class="form-group" style="width:20%;">
+
+            <span>@summary</span>
+            <a asp-action="Index" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-white px-2 @previousButtonDisabled">Prev</a>
+
+            <a asp-action="Index" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-white px-2 @nextButtonDisabled">Next</a>
+        </div>
+
+        <partial name="_SearchBarPartial"/>
+
+        <div class="form-group px-2" style="width:10%">
+            <a asp-controller="Circuit" asp-action="Index" class="text-white" title="Clear All">
+                <i class="fas fa-backspace"></i>
+            </a>
+        </div>
+    </div>
+
+        <article class="glass-pane p-3">
+           
+        @if (!Model.Any())
+        {
+            <p class="text-center">No result</p>
+        }
+
+        else
+        {
+            <div class="table-container">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <a asp-action="Index" asp-route-sortBy="@ViewData["NameSortParam"]">CLIENT</a>
+                            </th>
+                            <th>
+                                <a asp-action="Index" asp-route-sortBy="@ViewData["AddressSortParam"]">ADDRESS</a>
+                            </th>
+                            <th>
+                                <a asp-action="Index" asp-route-sortBy="@ViewData["ZoneSortParam"]">ZONE</a>
+                            </th>
+                            <th>
+                                <a asp-action="Index" asp-route-sortBy="@ViewData["ServiceTypeSortParam"]">SERVICE</a>
+                            </th>
+                            <th>
+                                <a asp-action="Index" asp-route-sortBy="@ViewData["IPPOPTypeSortParam"]">IP POP</a>
+                            </th>
+                            <th>
+                                <a asp-action="Index" asp-route-sortBy="@ViewData["AccountManagerSortParam"]">ACCOUNT MANAGER</a>
+                            </th>
+                            <th>
+                                <a asp-action="Index" asp-route-sortBy="@ViewData["BandwidthSortParam"]">BANDWIDTH</a>
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var link in Model)
+                        {
+                            <tr>
+                                <td data-label="CLIENT">@link.CircuitName</td>
+                                <td data-label="ADDRESS">@link.ServiceAddress</td>
+                                <td data-label="ZONE">@link.State.Zone.ZoneName</td>
+                                <td data-label="SERVICE">@link.Service?.Name</td>
+                                <td data-label="IP POP">@link.IPPoP?.IPPoPName</td>
+                                <td data-label="ACCOUNT MANAGER">@link.AccountManager</td>
+                                <td data-label="BANDWIDTH">@link.Bandwidth</td>
+                                <td data-label="Action" style="color:var(--text-color);">
+                                    <a style="font-size:3vw;" asp-controller="Circuit" asp-action="details" asp-route-id="@link.Id">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+        
+        }
+
+
+    </article>
+
+        @await Html.PartialAsync("_CreateNewPartial", "Circuit")
+    </form>
+</section>
+
+
+
+
+

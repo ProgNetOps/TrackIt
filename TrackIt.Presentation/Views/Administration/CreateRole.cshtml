@@ -1,0 +1,39 @@
+﻿@model TrackIt.Domain.ViewModel.CreateRoleViewModel
+
+@{
+    Layout = "_EmptyLayout";
+}
+
+<div class="signUpContainer">
+
+    @*  Background Video *@
+    <video autoplay loop muted playsinline class="background-clip">
+        @* <source src="/Glo Business Solutions.webm" type="Video/webm">  *@
+        <source src="~/video/market%20loop.mp4" type="video/mp4" />
+    </video>
+
+    @* Heading  *@
+    <div class="heading-container">
+        <h2 class="heading-text" data-text="Glo&nbsp;Enterprise&nbsp;Business">
+            Glo&nbsp;Enterprise&nbsp;Business
+        </h2>
+    </div>
+
+
+    <div class="LoginMain">
+        <input class="Logininput" type="checkbox" id="chk" aria-hidden="true">
+        <div class="signup">
+            <form asp-action="CreateRole" method="post">
+                <div asp-validation-summary="All" class="text-danger text-center"></div>
+                <label class="Loginlabel" for="chk" aria-hidden="true">Create Role</label>                
+                    <input asp-for="RoleName" class="Logininput" placeholder="Role Name">
+                <div class="text-center text-danger">
+                    <span asp-validation-for="RoleName"></span>
+                </div>
+                <button type="submit" class="Loginbutton">Create Role</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+

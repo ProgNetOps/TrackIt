@@ -1,0 +1,201 @@
+﻿@model PagedList<IPPoP>
+
+@{
+    int serial = 0;
+    string previousButtonDisabled = Model.HasPreviousPage ? string.Empty : "disabled";
+    string nextButtonDisabled = Model.HasNextPage ? string.Empty : "disabled";
+    int switchCount = 0;
+    int routerCount = 0; 
+    string summary = $"Page {Model.PageIndex} of {Model.TotalNumberOfPages}: {ViewBag.TotalCount} results";
+
+}
+
+
+<section style="background-color: transparent;">
+
+    <form method="get" asp-controller="IPPoP">
+
+       <div class=" p-2 mb-2 container" id="search-bar">
+
+            <div class="form-group" style="width:25%;">
+                <span>@summary</span>
+            <a asp-action="Index" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-white px-2 @previousButtonDisabled">Previous</a>
+
+            <a asp-action="Index" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-white px-2 @nextButtonDisabled">Next</a>
+        </div>
+        
+        <partial name="_SearchBarPartial" />
+
+        <div class="form-group px-2" style="width:10%">
+            <a asp-controller="IPPoP" asp-action="Index" class="text-white" title="Clear All">
+                <i class="fas fa-backspace"></i>
+            </a>
+        </div>
+       </div>
+        
+       <section class="bodyWrapper">
+        
+            <article style="display: flex;
+        justify-content: center;s
+        align-items: center;
+        min-height: 100vh;
+        background: transparent;
+        padding: 30px 0;">
+
+            <div class="wavyCardContainer">
+                @if (!Model.Any())
+                {
+                    <p class="text-center">No result</p>
+                }
+
+                else
+                {
+                    foreach (var PoP in Model)
+                    {
+                        //Calculate the number of switches and routers at a Point of Preference (POP)
+                        switchCount = PoP.Switches.Count;
+                        routerCount = PoP.Routers.Count;
+
+                        string deviceCount = switchCount == 0 && routerCount == 0 ? $"0 device" :
+                        switchCount == 1 && routerCount == 1 ? $"1 switch, 1 router" :
+                        switchCount == 1 && routerCount > 1 ? $"1 switch, {routerCount} routers" :
+                        switchCount >= 1 && routerCount == 1 ? $"{switchCount} switches, 1 router" :
+                        switchCount == 0 && routerCount == 1 ? $"0 switch, 1 router" :
+                        switchCount == 1 && routerCount == 0 ? $"1 switch, 0 router" :
+                        switchCount == 0 && routerCount > 1 ? $"0 switch, {routerCount} routers" :
+                        switchCount > 1 && routerCount == 0 ? $"{switchCount} switches, 0 router" :
+                        $"{PoP.Switches.Count} switches, {PoP.Routers.Count} routers";
+
+
+                        <div class="wavyCardBox" style="--clr:#ff5566cc;">
+                            <div class="content">
+                                <img src="/img/PoP.png">
+                                <div class="content text-center">
+                                    <h2 style="">@PoP.IPPoPName</h2>
+                                    <h4 style="color:#fff">@deviceCount</h4>
+                                    <p>
+                                        <a class="btn" asp-controller="IPPoP" asp-action="Details" asp-route-id="@PoP.Id">Details</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+
+            
+
+
+        @* <div class="clientCard-box">
+            @if (!Model.Any())
+            {
+                <p class="text-center">No result</p>
+            }
+
+            else
+            {
+                foreach (var PoP in Model)
+                {
+
+                    //Calculate the number of switches and routers at a Point of Preference (POP)
+                    switchCount = PoP.Switches.Count;
+                    routerCount = PoP.Routers.Count;
+
+                    string deviceCount = switchCount == 0 && routerCount == 0 ? $"0 device" :
+                    switchCount == 1 && routerCount == 1 ? $"1 switch, 1 router" :
+                    switchCount == 1 && routerCount > 1 ? $"1 switch, {routerCount} routers" :
+                    switchCount >= 1 && routerCount == 1 ? $"{switchCount} switches, 1 router" :
+                    switchCount == 0 && routerCount == 1 ? $"0 switch, 1 router" :
+                    switchCount == 1 && routerCount == 0 ? $"1 switch, 0 router" :
+                    switchCount == 0 && routerCount > 1 ? $"0 switch, {routerCount} routers" :
+                    switchCount > 1 && routerCount == 0 ? $"{switchCount} switches, 0 router" :
+                    $"{PoP.Switches.Count} switches, {PoP.Routers.Count} routers";
+
+
+                    <div class="clientCard" style="background-color:#ffb90066">
+                        <div class="content">
+                            <h3>@PoP.IPPoPName</h3>
+                            <img style="display: inline-block; width: 50%;height:auto;" src="/img/PoP.png" />                            
+                            <h4>@deviceCount</h4>
+                            <a class="btn" asp-controller="IPPoP" asp-action="Details" asp-route-id="@PoP.Id">Details</a>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+ *@
+       @*  @if (!Model.Any())
+        {
+            <p class="text-center">No result</p>
+        }
+
+        else
+        {
+
+            <div class="table-container">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>
+                                <a asp-action="Index" asp-route-sortBy="@ViewData["NameSortParam"]">PoP</a>
+                            </th>
+                            <th>
+                                Device Count
+                            </th>
+                            <th>
+                                <a asp-action="Index" asp-route-sortBy="@ViewData["StateSortParam"]">State</a>
+                            </th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var PoP in Model)
+                        {
+                            //Calculate the number of switches and routers at a Point of Preference (POP)
+                            switchCount = PoP.Switches.Count;
+                            routerCount = PoP.Routers.Count;
+                            
+                            string deviceCount = switchCount == 0 && routerCount == 0 ? $"0 device" :
+                            switchCount == 1 && routerCount == 1 ? $"1 switch, 1 router" :
+                            switchCount == 1 && routerCount > 1 ? $"1 switch, {routerCount} routers" :
+                            switchCount >= 1 && routerCount == 1 ? $"{switchCount} switches, 1 router" :
+                            switchCount == 0 && routerCount == 1 ? $"0 switch, 1 router" :
+                            switchCount == 1 && routerCount == 0 ? $"1 switch, 0 router" :
+                            switchCount == 0 && routerCount > 1 ? $"0 switch, {routerCount} routers" :
+                            switchCount > 1 && routerCount == 0 ? $"{switchCount} switches, 0 router" :
+                             $"{PoP.Switches.Count} switches, {PoP.Routers.Count} routers";
+                            
+
+                            serial += 1;
+                            <tr>
+                                <td data-label="S/N">@serial</td>
+                                <td data-label="PoP">@PoP.IPPoPName</td>
+                                <td data-label="Device Count">
+                                    @deviceCount
+                                </td>
+                                <td data-label="Address">@PoP.BTS.State.StateName</td>
+                                <td data-label="Action" style="color:var(--text-color);">
+                                    <a style="font-size:3vw;" asp-action="details" asp-route-id="@PoP.Id">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        } *@
+
+                
+            </article>
+        
+        </section>
+
+    </form>
+    @await Html.PartialAsync("_CreateNewPartial", "IPPoP")
+
+</section>
+

@@ -1,0 +1,13 @@
+﻿@if (ViewBag.ErrorTitle == null)
+{
+    <h3 class="text-center text-danger">
+        An error occured while processing your request.
+        The support team is notified and we are working on the fix
+    </h3>
+    <h5 class="text-center">Email us at ges.spoc@gloworld.com for further help</h5>
+}
+else
+{
+    <h1 class="text-danger text-center">@ViewBag.ErrorTitle</h1>
+    <h6 class="text-danger">@ViewBag.ErrorMessage</h6>
+}

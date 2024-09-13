@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Administration\EditUser.cshtml" />
+    <Content Remove="Views\Administration\EmployeeDetails.cshtml" />
+    <Content Remove="Views\Administration\UserDetails.cshtml" />
+    <Content Remove="Views\Circuit\Edit.cshtml" />
+    <Content Remove="Views\Client\Create.cshtml" />
+    <Content Remove="Views\Home\Welcome.cshtml" />
+    <Content Remove="Views\Shared\_ITSHeaderPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.11" />
+    <PackageReference Include="Rotativa.AspNetCore" Version="1.3.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TrackIt.CustomValidations\TrackIt.CustomValidations.csproj" />
+    <ProjectReference Include="..\TrackIt.Domain\TrackIt.Domain.csproj" />
+    <ProjectReference Include="..\TrackIt.Repository\TrackIt.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Administration\EditUser.cshtml" />
+    <None Include="Views\Administration\EmployeeDetails.cshtml" />
+    <None Include="Views\Administration\UserDetails.cshtml" />
+    <None Include="Views\Circuit\Edit.cshtml" />
+    <None Include="Views\Client\Create.cshtml" />
+    <None Include="Views\Home\Welcome.cshtml" />
+    <None Include="Views\Shared\_ITSHeaderPartial.cshtml" />
+    <None Include="Views\Shared\_ResourceViewLayout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Administration\EditUser.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Administration\EditUser.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Administration\EmployeeDetails.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Circuit\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Client\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Home\Welcome.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\_ITSHeaderPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Security\" />
+    <Folder Include="wwwroot\images\Contact\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\Welcome.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Client\Create.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Circuit\Edit.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\_ITSHeaderPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Administration\EmployeeDetails.cshtml" />
+  </ItemGroup>
+
+</Project>

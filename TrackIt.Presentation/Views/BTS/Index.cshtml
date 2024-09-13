@@ -1,0 +1,79 @@
+﻿@model PagedList<BTS>
+
+@{
+    string previousButtonDisabled = Model.HasPreviousPage ? string.Empty : "disabled";
+    string nextButtonDisabled = Model.HasNextPage ? string.Empty : "disabled";
+    string summary = $"Page {Model.PageIndex} of {Model.TotalNumberOfPages}: {ViewBag.TotalCount} results";
+}
+
+<section>
+
+    <form method="get" asp-controller="BTS">
+        <div class=" p-2 mb-2 container" id="search-bar">
+            <a style="color:#fff; font-size:2rem;" asp-controller="BTS" asp-action="BTSPdf">
+                <i class="fa-regular fa-file-pdf"></i>
+            </a>
+            <div class="form-group" style="width:25%;">
+                <span>@summary</span>
+                <a asp-action="Index" asp-route-searchBy="@ViewData["CurrentSearchBy"]" asp-route-searchString="@ViewData["CurrentSearchString"]" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-white px-2 @previousButtonDisabled">
+                    <span style="font-weight:bold">&lt;</span>
+                </a>
+                <a asp-action="Index" asp-route-searchBy="@ViewData["CurrentSearchBy"]" asp-route-searchString="@ViewData["CurrentSearchString"]" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-white px-2 @nextButtonDisabled">
+                    <span style="font-weight:bold">&gt;</span>
+                </a>
+            </div>
+
+            <partial name="_SearchBarPartial" />
+
+            <div class="form-group px-2" style="width:10%">
+                <a asp-controller="BTS" asp-action="Index" class="text-white" title="Clear All">
+                    <i class="fas fa-backspace"></i>
+                </a>
+            </div>
+        </div>
+
+        <section class="bodyWrapper">
+
+            <article style="display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: transparent;
+        padding: 30px 0;">
+
+            <div class="wavyCardContainer">
+
+                @if (!Model.Any())
+                {
+                    <p class="text-center">No result</p>
+                }
+
+                else
+                {
+                    foreach (var bts in Model)
+                    {
+                        
+                        <div class="wavyCardBox" style="--clr:#ff5566cc;">
+                            <div class="content">
+                                <img src="/img/BTS.png">
+                                <div class="content text-center">
+                                    <h2 style="">@bts.BTSName</h2>
+                                    <p>
+                                        <a class="btn" asp-controller="BTS" asp-action="Details" asp-route-id="@bts.Id">Details</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+                       
+        </article>
+
+        </section>
+    </form>
+
+    @await Html.PartialAsync("_CreateNewPartial", "BTS")
+
+</section>
+

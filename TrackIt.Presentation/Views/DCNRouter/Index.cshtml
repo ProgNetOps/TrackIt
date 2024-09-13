@@ -1,0 +1,126 @@
+﻿@model PagedList<DCNRouter>
+
+@{
+    int serial = 0;
+    string previousButtonDisabled = Model.HasPreviousPage ? string.Empty : "disabled";
+    string nextButtonDisabled = Model.HasNextPage ? string.Empty : "disabled";
+    string summary = $"Page {Model.PageIndex} of {Model.TotalNumberOfPages}: {ViewBag.TotalCount} results";
+}
+
+
+<section style="background-color: transparent;">
+
+        <div class=" p-2 mb-2 container" id="search-bar">
+
+        <div class="form-group" style="width:25%;">
+            <span>@summary</span>
+            <a asp-action="Index" asp-route-searchBy="@ViewData["CurrentSearchBy"]" asp-route-searchString="@ViewData["CurrentSearchString"]" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-white px-2 @previousButtonDisabled">
+                <span style="font-weight:bold">&lt;</span>
+            </a>
+
+            <a asp-action="Index" asp-route-searchBy="@ViewData["CurrentSearchBy"]" asp-route-searchString="@ViewData["CurrentSearchString"]" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-white px-2 @nextButtonDisabled">
+                <span style="font-weight:bold">&gt;</span>
+            </a>
+            </div>
+
+
+            <partial name="_SearchBarPartial" />
+
+
+            <div class="form-group px-2" style="width:10%">
+                <a asp-controller="DCNRouter" asp-action="Index" class="text-white" title="Clear All">
+                    <i class="fas fa-backspace"></i>
+                </a>
+            </div>
+        </div>
+
+    <article class="glass-pane p-3">       
+
+       @*  <div class="wavyCardContainer">
+            @if (!Model.Any())
+            {
+                <p class="text-center">No result</p>
+            }
+
+            else
+            {
+                foreach (var router in Model)
+                {
+                    <div class="wavyCardBox" style="--clr:#ff5566cc;">
+                        <div class="content">
+                            <img src="/img/Router.png" />
+
+                            <h2>@router.RouterName</h2>
+                            <div class="content text-center">
+                                <h4 style="color:#fff">@router.IPPoP.IPPoPName</h4>
+                                <h4 style="color:#fff">@router.ManagementIpAddress</h4>
+                                <a class="btn" asp-controller="DCNRouter" asp-action="Details" asp-route-id="@router.Id">Details</a>
+                            </div>
+                         </div>
+
+                    </div>
+                }
+            }
+        </div>
+  *@
+ 
+        <div>
+
+            @if (!Model.Any())
+            {
+                <p class="text-center">No result</p>
+            }
+
+            else
+            {
+                <div class="table-container">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>S/N</th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["NameSortParam"]">ROUTER NAME</a>
+                                </th>
+                                <th>ROUTER TYPE</th>
+                                <th>MANAGEMENT IP</th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["PoPSortParam"]">POP</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["StateSortParam"]">STATE</a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var router in Model)
+                            {
+                                serial += 1;
+
+
+                                <tr>
+                                    <td data-label="S/N">@serial</td>
+                                    <td data-label="ROUTER NAME">@router.RouterName</td>
+                                    <td data-label="ROUTER TYPE">@router.RouterType</td>
+                                    <td data-label="MANAGEMENT IP">@router.ManagementIpAddress</td>
+                                    <td data-label="POP">@router.IPPoP.IPPoPName</td>
+                                    <td data-label="State">@router.IPPoP.BTS.State.StateName</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            }
+
+        </div>
+
+ 
+        
+    </article>
+
+    @await Html.PartialAsync("_CreateNewPartial", "DCNRouter")
+
+</section>
+

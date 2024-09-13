@@ -1,0 +1,160 @@
+﻿@model EmployeeDetailsViewModel
+
+@{
+    string? photoPath = null;
+
+    if (Model.GenderId.ToString().StartsWith("823"))
+    {
+        photoPath = "~/Images/" + (Model.ExistingPhotoPath ?? "malestaff.jpg");
+    }
+    else 
+    {
+        photoPath = "~/Images/" + (Model.ExistingPhotoPath ?? "femalestaff.jpg");
+    }
+}
+
+<div class="row">
+    <form enctype="multipart/form-data" method="post" asp-action="EditUser" class="mt-3 p-sm-5">
+        <input hidden asp-for="ExistingPhotoPath" />
+        <div class="glass-pane p-5">
+            <div class="row p-md-5">
+                <div class="col-md-6  col-lg-4">
+                    <div class="form-group mb-3">
+                        <label asp-for="GenderId" class="custom-control-label text-white"></label>
+                        <input asp-for="Gender.Name" disabled class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="FirstName" class="custom-control-label text-white"></label>
+                        <input asp-for="FirstName" disabled class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Surname" class="custom-control-label text-white"></label>
+                        <input asp-for="Surname" disabled class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="OfficeAddress" class="custom-control-label text-white"></label>
+                        <textarea asp-for="OfficeAddress" disabled class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="form-group mb-3">
+                        <label asp-for="UserCategoryId" class="custom-control-label text-white"></label>
+                        <input asp-for="UserCategory.CategoryOfApplicationUser" disabled class="form-control">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="OfficeLocation" class="custom-control-label text-white"></label>
+                        <input asp-for="State.StateName" disabled class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="OnboardingDate" class="custom-control-label text-white"></label>
+                        <input asp-for="OnboardingDate" disabled class="form-control" />
+
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="PhoneNumber" class="custom-control-label text-white"></label>
+                        <input asp-for="PhoneNumber" disabled class="form-control">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="form-group mb-3">
+                        <label asp-for="AlternateNumber" class="custom-control-label text-white"></label>
+                        <input asp-for="AlternateNumber" disabled class="form-control">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="UnitId" class="custom-control-label text-white"></label>
+                        <input asp-for="Unit.Name" disabled class="form-control">
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Email" class="custom-control-label text-white"></label>
+                        <input asp-for="Email" readonly class="form-control" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="row p-md-5">
+                <div class="form-group col-md-6 offset-md-3 mb-3">
+                    
+                    <img style="width:100%; height:auto;" src="@photoPath" class="imageThumbnail" asp-append-version="true" />
+                </div>
+            </div>
+
+            <div class="row col-md-8 offset-md-2 ">
+                <div class="form-group text-center ">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="AllUsers" asp-controller="Administration" class="btn btn-outline-primary col-3 m-1">Back</a>
+                        <a asp-controller="Administration" asp-action="DeleteUser" asp-route-id="@Model.Id" onclick="return confirm('Are you sure you want to delete: @Model.Email?')" class="btn btn-danger col-3" style="width:auto;">Delete User</a>
+                    }
+                    else
+                    {
+                        @* <a asp-action="EditUser" asp-route-id="@Model.Id" class="btn btn-primary col-3 m-1">Edit</a> *@
+                        <a asp-action="Index" asp-controller="Home" class="btn btn-outline-primary col-3 m-1">Back</a>
+
+                    }
+                </div>
+            </div>
+
+            <hr style="height:5px; color:#fff" />
+
+            <div class="card m-3 p-md-5">
+                <div class="card-header">
+                    <h3>User Roles</h3>
+                </div>
+                <div class="card-body">
+                    @if (Model.Roles.Any())
+                    {
+                        foreach (var role in Model.Roles)
+                        {
+                            <h5 class="card-title">@role</h5>
+                        }
+                    }
+                    else
+                    {
+                        <h5 class="card-title">None at the moment</h5>
+                    }
+                </div>
+                <div class="card-footer">
+                    @* <a asp-action="ManageUserRoles" asp-route-userId="@Model.Id" style="width:auto" class="btn btn-primary">
+                    Manage Roles
+                    </a> *@
+                </div>
+            </div>
+
+            <hr style="height:5px; color:#fff" />
+
+            <div class="card m-3 p-md-5">
+                <div class="card-header">
+                    <h3>User Claims</h3>
+                </div>
+                <div class="card-body">
+                    @if (Model.Claims.Any())
+                    {
+                        foreach (var claim in Model.Claims)
+                        {
+                            <h5 class="card-title">@claim</h5>
+                        }
+                    }
+                    else
+                    {
+                        <h5 class="card-title">None at the moment</h5>
+                    }
+                </div>
+                <div class="card-footer">
+                    @* <a asp-action="ManageUserClaims" asp-route-userId="@Model.Id"
+                    style="width:auto" class="btn btn-primary">
+                    Manage Claims
+                    </a> *@
+                </div>
+            </div>
+        </div>
+    </form>
+
+    @await Html.PartialAsync("_EditPartial", "Administration")
+</div>

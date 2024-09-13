@@ -1,0 +1,118 @@
+﻿
+<aside class="sidemenu">
+    <ul>
+       <li>
+            <a asp-controller="Administration" asp-action="AllRoles">
+                <span class="icon">
+                    <i class="bi bi-house-gear-fill"></i>
+                </span>
+                <span class="text">Access Management</span>
+            </a>
+        </li> 
+
+        <li>
+            <a asp-controller="Client" asp-action="Index">
+                <span class="icon">
+                    <i class="fa-solid fa-users-gear"></i>
+                </span>
+                <span class="text">Client Management</span>
+            </a>
+        </li>
+
+        <li id = "toggle">
+            <a href="#">
+                <span class="icon">
+                    <i class="bi bi-qr-code"></i>
+                </span>
+                <span class="text">Asset Tracking</span>
+            </a>
+            <div id="toggle-box">
+
+        <li >
+            <a asp-controller="NetworkSwitch" asp-action="Index">
+                <span class="icon">
+                    <i class="fa-solid fa-network-wired"></i>
+                </span>
+                <span class="text">Enterprise Switches</span>
+            </a>
+        </li>
+        <li >
+            <a asp-controller="DCNRouter" asp-action="Index">
+                <span class="icon">
+                    <i class="bi bi-router-fill"></i>
+                </span>
+                <span class="text">MPLS Routers</span>
+            </a>
+        </li>
+        <li>
+        <li >
+            <a asp-controller="IPPoP" asp-action="Index">
+                <span class="icon">
+                    <i class="fa-brands fa-hubspot"></i>
+                </span>
+                <span class="text">IP PoPs</span>
+            </a>
+        </li>
+        <li >
+            <a asp-controller="BTS" asp-action="Index">
+                <span class="icon">
+                    <i class="fa-solid fa-tower-cell"></i>
+                </span>
+                <span class="text">Base Stations</span>
+            </a>
+        </li>
+
+       
+        <li>
+            <a asp-controller="Administration" asp-action="AllUsers">
+                <span class="icon">
+                    <i class="bi bi-person-fill-gear"></i>
+                </span>
+                <span class="text">User/HR Management</span>
+            </a>
+        </li>
+
+        <li>
+            <a asp-controller="TicketingSystem" asp-action="Index">
+                <span class="icon">
+                    <i class="bi bi-postage-fill"></i>
+                </span>
+                <span class="text">Trouble Ticketing</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="icon">
+                    <i class="bi bi-list-check"></i>
+                </span>
+                <span class="text">Approvals & Tasks</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="icon">
+                    <i class="bi bi-graph-up-arrow"></i>
+                </span>
+                <span class="text">Analytics</span>
+            </a>
+        </li>
+
+    </ul>
+</aside>
+
+
+
+@section Scripts{
+    <script>
+        let toggle = document.querySelector("#toggle"),
+            toggled = document.querySelector("#toggle-box");
+
+        toggle.addEventListener("click", () => {
+            if (toggled.style.display == "block") {
+                toggled.style.display = "none"
+            } else {
+                toggled.style.display = "block";
+            }
+        })
+    </script>
+}

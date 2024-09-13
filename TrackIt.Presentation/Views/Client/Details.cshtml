@@ -1,0 +1,71 @@
+﻿@model ClientDetailsViewModel
+
+<section style="background-color: transparent;">
+    <div class="glass-pane">
+        <h2 class="text-center text-white">Client ID: @Model.Id</h2>
+        <article class="bodyWrapper">
+
+            <input asp-for="@Model.Id" hidden />
+
+            <div>
+
+                <div class="table-container">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th><a asp-action="Index" asp-route-sortBy="@ViewData["NameSortParam"]">CLIENT</a></th>
+                                <th>ADDRESS</th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["ZoneSortParam"]">ZONE</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["ServiceTypeSortParam"]">SERVICE</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["AccountManagerSortParam"]">ACCOUNT MANAGER</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["BandwidthSortParam"]">BANDWIDTH</a>
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var link in Model.CircuitDetailsViewModels)
+                            {
+                                <tr>
+                                    <td data-label="CLIENT">@link.CircuitName</td>
+                                    <td data-label="ADDRESS">@link.ServiceAddress</td>
+                                    <td data-label="ZONE">@link.State.Zone?.ZoneName</td>
+                                    <td data-label="SERVICE">@link.Service?.Name</td>
+                                    <td data-label="ACCOUNT MANAGER">@link.AccountManager</td>
+                                    <td data-label="BANDWIDTH">@link.Bandwidth</td>
+                                    <td data-label="Action" style="color:var(--text-color);">
+                                        <a style="font-size:3vw;" asp-controller="Circuit" asp-action="details" asp-route-id="@link.Id">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+            </div>
+        </article>
+
+
+        <div class="form-group row text-center m-5">
+            <div class=" col-4 offset-4" style="position:relative;">
+                <a class="shinyButton" asp-controller="Client" asp-action="Index">Back</a>
+            </div>
+        </div>
+
+    </div>
+                        
+    @await Html.PartialAsync("_CreateNewPartial", "Circuit")
+</section>

@@ -1,0 +1,68 @@
+﻿@model PagedList<Client>
+
+@{
+    string previousButtonDisabled = Model.HasPreviousPage ? string.Empty : "disabled";
+    string nextButtonDisabled = Model.HasNextPage ? string.Empty : "disabled";
+    string summary = $"Page {Model.PageIndex} of {Model.TotalNumberOfPages}: {ViewBag.TotalCount} results";
+}
+
+
+<section  style="background-color: transparent;">
+    <form method="get" asp-controller="Client">
+
+    <div class=" p-2 mb-2 container" id="search-bar">
+
+            <div class="form-group" style="width:25%;">
+                <span>@summary</span>
+                <a asp-action="Index" asp-route-searchBy="@ViewData["CurrentSearchBy"]" asp-route-searchString="@ViewData["CurrentSearchString"]" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-white px-2 @previousButtonDisabled">
+                    <span style="font-weight:bold">&lt;</span>
+                </a>
+
+                <a asp-action="Index" asp-route-searchBy="@ViewData["CurrentSearchBy"]" asp-route-searchString="@ViewData["CurrentSearchString"]" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-white px-2 @nextButtonDisabled">
+                    <span style="font-weight:bold">&gt;</span>
+                </a>
+        </div>
+
+            <partial name="_SearchBarPartial" />
+
+
+        <div class="form-group px-2" style="width:10%">
+            <a asp-controller="Client" asp-action="Index" class="text-white" title="Clear All">
+                <i class="fas fa-backspace"></i>
+            </a>
+        </div>
+    </div>
+    
+    <article class="bodyWrapper">
+
+        <div class="clientCard-box">
+            @if (!Model.Any())
+            {
+                <p class="text-center">No result</p>
+            }
+
+            else
+            {
+                foreach(var client in Model)
+                {
+                    
+                    <div class="clientCard">
+                        <div class="content">
+                                <h3 style="color:#fff">@client?.Circuits?.Count</h3>
+                            <h4 style="color:#fff" >@client?.ClientName</h4>
+                            <a class="btn" asp-controller="Client" asp-action="Details" asp-route-id="@client.Id">Details</a>
+                        </div>
+                    </div>
+                }
+            }
+         
+       </div>
+
+        
+    </article>
+    </form>
+    @await Html.PartialAsync("_CreateNewPartial", "Client")
+
+</section>
+
+

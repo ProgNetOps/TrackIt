@@ -1,0 +1,211 @@
+﻿@model TrackIt.Presentation.Models.DTO.IPPoPDTO
+
+@{
+    int serial = 0;
+}
+
+
+<section class="content-container">
+    <article>
+        <input asp-for="@Model.Id" hidden />
+
+        <div class="form-group row m-2">
+            <label asp-for="IPPoPName" class="col-sm-4 col-form-label"></label>
+            <div class="col-sm-8">
+                <input asp-for="IPPoPName" readonly class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row m-2">
+            <label asp-for="BTS.LocationAddress" class="col-sm-4 col-form-label"></label>
+            <div class="col-sm-8">
+                <input asp-for="BTS.LocationAddress" class="form-control" readonly />
+            </div>
+        </div>
+
+
+        <div class="form-group row m-2">
+            <label asp-for="BTS.Coordinates" class="col-sm-4 col-form-label"></label>
+            <div class="col-sm-8">
+                <input asp-for="BTS.Coordinates" class="form-control" readonly />
+            </div>
+        </div>
+
+        <div class="form-group row m-2">
+            <label asp-for="BTS.State.StateName" class="col-sm-4 col-form-label"></label>
+            <div class="col-sm-8">
+                <input asp-for="BTS.State.StateName" class="form-control" readonly />
+            </div>
+        </div>
+
+        <hr />
+
+        @if (Model.Routers.Any())
+        { 
+            <div>
+                <h1 style="text-align:center">DCN ROUTER(S)</h1>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>
+                                <a asp-action="Index" asp-route-sortBy="@ViewData["NameSortParam"]">ROUTER NAME</a>
+                            </th>
+                            <th>ROUTER TYPE</th>
+                            <th>MANAGEMENT IP</th>
+                            <th>
+                                <a asp-action="Index" asp-route-sortBy="@ViewData["PoPSortParam"]">POP</a>
+                            </th>
+                            <th>
+                                <a asp-action="Index" asp-route-sortBy="@ViewData["StateSortParam"]">STATE</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var router in Model.Routers)
+                        {
+                            serial += 1;
+
+
+                            <tr>
+                                <td data-label="S/N">@serial</td>
+                                <td data-label="ROUTER NAME">@router.RouterName</td>
+                                <td data-label="ROUTER TYPE">@router.RouterType</td>
+                                <td data-label="MANAGEMENT IP">@router.ManagementIpAddress</td>
+                                <td data-label="POP">@router.IPPoP.IPPoPName</td>
+                                <td data-label="State">@router.IPPoP.BTS.State.StateName</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>          
+        }
+        
+        <hr />
+        
+        @if (Model.Switches.Any())
+        {
+
+            <div>
+                <h1 style="text-align:center">SWITCH(ES)</h1>
+                <div class="table-container">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>S/N</th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["NameSortParam"]">SWITCH NAME</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["PoPSortParam"]">POP</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["StateSortParam"]">STATE</a>
+                                </th>
+                                <th>MANAGEMENT IP</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var networkswitch in Model.Switches)
+                            {
+                                serial += 1;
+                                <tr>
+                                    <td data-label="S/N">@serial</td>
+                                    <td data-label="SWITCH NAME">@networkswitch.SwitchName</td>
+                                    <td data-label="POP">@networkswitch.IPPoP.IPPoPName</td>
+                                    <td data-label="STATE">@networkswitch.IPPoP.BTS.State.StateName</td>
+                                    <td data-label="MANAGEMENT IP">@networkswitch.ManagementIP</td>
+                                    <td data-label="ActionS" style="color:var(--text-color);">
+                                        <a style="font-size:3vw;" asp-controller="NetworkSwitch" asp-action="details" asp-route-id="@networkswitch.Id">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        
+        }
+
+        @if (Model.Circuits.Any())
+        {
+            <div>
+
+                <h1 style="text-align:center">SERVICE(S)</h1>
+                <div class="table-container">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th><a asp-action="Index" asp-route-sortBy="@ViewData["NameSortParam"]">CLIENT</a></th>
+                                <th>ADDRESS</th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["ZoneSortParam"]">ZONE</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["ServiceTypeSortParam"]">SERVICE</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["IPPOPTypeSortParam"]">IP POP</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["AccountManagerSortParam"]">ACCOUNT MANAGER</a>
+                                </th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortBy="@ViewData["BandwidthSortParam"]">BANDWIDTH</a>
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var link in Model.Circuits)
+                            {
+                                <tr>
+                                    <td data-label="CLIENT">@link.CircuitName</td>
+                                    <td data-label="ADDRESS">@link.ServiceAddress</td>
+                                    <td data-label="ZONE">@link.State?.Zone?.ZoneName</td>
+                                    <td data-label="SERVICE">@link?.Service?.Name</td>
+                                    <td data-label="IP POP">@link.IPPoP?.IPPoPName</td>
+                                    <td data-label="ACCOUNT MANAGER">@link.AccountManager</td>
+                                    <td data-label="BANDWIDTH">@link.Bandwidth</td>
+                                    <td data-label="Action" style="color:var(--text-color);">
+                                        <a style="font-size:3vw;" asp-controller="Circuit" asp-action="details" asp-route-id="@link.Id">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        }
+
+
+     
+
+        <div class="form-group row text-center m-5">
+            <div class=" col-4 offset-4" style="position:relative;">
+                <a class="shinyButton" asp-controller="IPPoP" asp-action="Index">Back&nbsp;To&nbsp;IP PoPs</a>
+            </div>
+        </div>
+
+        <hr class="m-4" />
+    </article>
+
+    <a asp-controller="IPPoP" asp-action="Edit" asp-route-id="@Model.Id" class="fixed-button" style="font-size:calc(1.5rem + 2vw)">
+        <i class="bi bi-pencil-square"></i>
+    </a>
+
+</section>

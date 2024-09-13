@@ -1,0 +1,309 @@
+﻿@model CircuitDetailsViewModel
+
+<div class="row">
+
+    <div class="glass-pane p-5">
+        <h1 class="text-center text-white">
+            <u>Service Details</u>
+        </h1>
+
+        <h2 class="text-center text-white">Servce ID: @Model.Id</h2>
+            <div class="row p-md-5">
+                <div class="col-lg-4 col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="ClientId" class="custom-control-label text-white"></label>
+                        <input asp-for="Client" class="form-control" readonly value="@Model.Client.ClientName" />
+                   </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="CircuitName" class="custom-control-label text-white"></label>
+                        <input asp-for="CircuitName" class="form-control" readonly>
+                   </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ServiceAddress" class="custom-control-label text-white"></label>
+                        <textarea asp-for="ServiceAddress" class="form-control" readonly></textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Town" class="custom-control-label text-white"></label>
+                        <input asp-for="Town" class="form-control" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="StateId" class="custom-control-label text-white"></label>
+                        <input asp-for="State" class="form-control" readonly value="@Model.State.StateName" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Longitude" class="custom-control-label text-white"></label>
+                        <input asp-for="Longitude" class="form-control" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Latitude" class="custom-control-label text-white"></label>
+                        <input asp-for="Latitude" class="form-control" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ServiceId" class="custom-control-label text-white"></label>
+                        <input asp-for="Service" class="form-control" readonly value="@Model.Service?.Name" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ServiceStartDate" class="custom-control-label text-white"></label>
+                        <input asp-for="ServiceStartDate" class="form-control" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="AccountManager" class="custom-control-label text-white"></label>
+                        <input asp-for="AccountManager" class="form-control" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ProjectManager" class="custom-control-label text-white"></label>
+                        <input asp-for="ProjectManager" class="form-control" readonly>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="AnnualRevenue" class="custom-control-label text-white"></label>
+                        <input class="form-control" readonly value="@ViewBag.AnnualRevenue">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Bandwidth" class="custom-control-label text-white"></label>
+                        <input class="form-control" readonly value="@ViewBag.Bandwidth">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="TransmissionPath" class="custom-control-label text-white"></label>
+                        <textarea asp-for="TransmissionPath" class="form-control" readonly></textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="CircuitStateId" class="custom-control-label text-white"></label>
+                        <input asp-for="CircuitState" class="form-control" readonly value="@Model.CircuitState?.Name">
+                   
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="IPPoPId" class="custom-control-label text-white"></label>
+                        <input asp-for="IPPoP" class="form-control" readonly value="@Model.IPPoP?.IPPoPName">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="InstallersContactDetails" class="custom-control-label text-white"></label>
+                        <textarea asp-for="InstallersContactDetails" class="form-control" readonly></textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ClientContactDetails" class="custom-control-label text-white"></label>
+                        <textarea asp-for="ClientContactDetails" class="form-control" readonly></textarea>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="LastMileName" class="custom-control-label text-white"></label>
+                        <input asp-for="LastMileName" class="form-control" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="LastMileDeviceId" class="custom-control-label text-white"></label>
+                        <input asp-for="LastMileDevice" class="form-control" readonly value="@Model.LastMileDevice?.LastMileDeviceName">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="RadioManagementVLAN" class="custom-control-label text-white"></label>
+                        <input asp-for="RadioManagementVLAN" class="form-control" readonly>
+                    </div>
+                </div>
+                    
+                <div class="col-lg-4 col-md-6">
+
+                
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="RadioFrequency" class="custom-control-label text-white"></label>
+                        <input asp-for="RadioFrequency" class="form-control" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="LinkID" class="custom-control-label text-white"></label>
+                        <input asp-for="LinkID" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ODUSerialNumber" class="custom-control-label text-white"></label>
+                        <input asp-for="ODUSerialNumber" class="form-control">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="IDUSerialNumber" class="custom-control-label text-white"></label>
+                        <input asp-for="IDUSerialNumber" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ServiceVLAN" class="custom-control-label text-white"></label>
+                        <input asp-for="ServiceVLAN" class="form-control" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ManagedRadioIPAtPoP" class="custom-control-label text-white"></label>
+                        <input asp-for="ManagedRadioIPAtPoP" class="form-control" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ManagedRadioIPAtClient" class="custom-control-label text-white"></label>
+                        <input asp-for="ManagedRadioIPAtClient" class="form-control" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ManagedRadioIPGateway" class="custom-control-label text-white"></label>
+                        <input asp-for="ManagedRadioIPGateway" class="form-control" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="AssignedPublicIP" class="custom-control-label text-white"></label>
+                        <input asp-for="AssignedPublicIP" class="form-control" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="AssignedGateway" class="custom-control-label text-white"></label>
+                        <input asp-for="AssignedGateway" class="form-control" readonly>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="AssignedSubnetMask" class="custom-control-label text-white"></label>
+                        <input asp-for="AssignedSubnetMask" class="form-control" readonly>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-group row text-center m-5">
+                <div class=" col-4 offset-4" style="position:relative;">
+                    <a class="shinyButton" asp-controller="Client" asp-action="Details" asp-route-id="@Model.Client.Id">Back</a>
+                </div>
+            </div>
+
+   </div>
+
+    @await Html.PartialAsync("_EditPartial", "Circuit")
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+@* <section style="background-color: transparent;">
+    <article  class="bodyWrapper glass-pane p-5">
+
+        <input asp-for="@Model.Id" hidden />
+         <div class="content-container">
+
+            <div class="form-group row m-2">
+                <label asp-for="CircuitName" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="CircuitName" readonly class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="ServiceAddress" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <textarea asp-for="ServiceAddress" readonly class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="Town" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="Town" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="State.StateName" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="State.StateName" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="State.Zone.ZoneName" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="State.Zone.ZoneName" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="AccountManager" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="AccountManager" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="Bandwidth" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="Bandwidth" class="form-control" readonly />
+                </div>
+            </div>
+
+
+            @{
+                var revenue = $"\u20A6 {Model.AnnualRevenue}";
+            }
+
+            <div class="form-group row m-2">
+                <label asp-for="AnnualRevenue" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="AnnualRevenue" class="form-control" readonly value=@revenue />
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="Service" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="Service" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="Coordinates" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="Coordinates" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="ProjectManager" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="ProjectManager" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="TAM" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="TAM" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="IPPoP.IPPoPName" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="IPPoP.IPPoPName" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="ClientContactDetails" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="ClientContactDetails" class="form-control" readonly />
+                </div>
+            </div>
+
+            <div class="form-group row text-center m-5">
+                <div class=" col-4 offset-4" style="position:relative;">
+                    <a class="shinyButton" asp-controller="Circuit" asp-action="Index">Back&nbsp;To&nbsp;Services</a>
+                </div>
+            </div>
+
+        </div>
+             
+        <hr class="m-4" />
+    </article>
+
+    <a asp-controller="Circuit" asp-action="Edit" asp-route-id="@Model.Id" class="fixed-button" style="font-size:calc(1.5rem + 2vw)">
+        <i class="bi bi-pencil-square"></i>
+    </a>
+
+</section> *@
+
+

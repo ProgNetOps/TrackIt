@@ -1,0 +1,59 @@
+﻿@model BTSCreateViewModel
+
+
+<div class="glass-pane row p-5">
+<section class="content-container">
+    
+    <article>
+        <form method="post" asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group row m-2">
+                <label asp-for="BTSName" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <input asp-for="BTSName" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="LocationAddress" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <textarea asp-for="LocationAddress" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="Longitude" class="col-sm-4 col-form-label">Longitude in Decimal</label>
+                <div class="col-sm-8">
+                    <input asp-for="Longitude" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="Latitude" class="col-sm-4 col-form-label">Latitude in Decimal</label>
+                <div class="col-sm-8">
+                    <input asp-for="Latitude" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row m-2">
+                <label asp-for="StateId" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <select asp-for="StateId" class="form-control" asp-items="ViewBag.States">
+                        <option value="">Select State</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row text-center m-5">
+                <div class=" col-4 offset-4" style="position:relative;">
+                    <button type="submit" class="shinyButton">Create BTS</button>
+                </div>
+            </div>
+
+        </form>
+    </article>
+    
+
+</section>
+</div>

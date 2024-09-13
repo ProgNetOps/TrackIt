@@ -1,0 +1,49 @@
+﻿@model TrackIt.Domain.ViewModel.LoginViewModel;
+
+@{
+    Layout = "_EmptyLayout";
+}
+
+<div class="signUpContainer">
+
+    @*  Background Video *@
+    <video autoplay loop muted playsinline class="background-clip">
+        @* <source src="/Glo Business Solutions.webm" type="Video/webm">  *@
+        <source src="~/video/market%20loop.mp4" type="video/mp4" />
+    </video>
+
+    @* Heading  *@
+    <div class="heading-container">
+        <h2 class="heading-text" data-text="Glo&nbsp;Enterprise&nbsp;Business">
+            Glo&nbsp;Enterprise&nbsp;Business
+        </h2>
+    </div>
+
+    
+    <div class="LoginMain">
+        <input class="Logininput" type="checkbox" id="chk" aria-hidden="true">
+        <div class="signup">
+            @* Remove the asp-action tag helper because of the returnUrl *@
+            <form method="post">
+                @* <div asp-validation-summary="All" class="text-danger text-center"></div> *@
+                <label class="Loginlabel" for="chk" aria-hidden="true">Log In</label>
+                <input asp-for="Email" class="Logininput" placeholder="Official Email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="Password" class="Logininput" placeholder="Password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <div class="form-group form-check text-center">
+                    <label class="form-check-label text-white">
+                        <input asp-for="RememberMe" class=" form-check-input" />
+                        @Html.DisplayNameFor(model => model.RememberMe)
+                    </label>
+                </div>
+                <button type="submit" class="Loginbutton">Login</button>
+                <p>Not registered? <a asp-action="Register">Sign Up</a> </p>
+            </form>
+        </div>
+
+    </div>
+
+
+</div>
+

@@ -1,0 +1,62 @@
+﻿@using TrackIt.Domain.Enums
+@model RegisterThirdPartyViewModel;
+
+@{
+    Layout = "_EmptyLayout";
+}
+
+<div class="signUpContainer">
+
+    @*  Background Video *@
+    <video autoplay loop muted playsinline class="background-clip">
+        @* <source src="/Glo Business Solutions.webm" type="Video/webm">  *@
+        <source src="~/video/market%20loop.mp4" type="video/mp4" />
+    </video>
+
+    @* Heading  *@
+    <div class="heading-container">
+        <h2 class="heading-text" data-text="Glo&nbsp;Enterprise&nbsp;Business">
+            Glo&nbsp;Enterprise&nbsp;Business
+        </h2>
+    </div>
+
+    <div class="LoginMain">
+        <input class="Logininput" type="checkbox" id="chk" aria-hidden="true">
+        <div class="signup text-center">
+            <form enctype="multipart/form-data" asp-action="RegisterTP" method="post">
+                @* <div asp-validation-summary="All" class="text-danger text-center"></div> *@
+                <label class="Loginlabel" for="chk" aria-hidden="true">Sign Up</label>
+
+                <div style="display:flex; flex-direction:column; align-items: center;">
+                    
+                    <div class="col-sm-8 align-items-center mb-3">
+                        <select asp-for="UserCategoryId" class="form-control form-select" asp-items="ViewBag.Categories">
+                            <option selected disabled value="">Select Category</option>
+                        </select>
+                        <span asp-validation-for="UserCategoryId" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <input asp-for="FirstName" class="Logininput" placeholder="First Name">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <input asp-for="Surname" class="Logininput" placeholder="Surname">
+                <span asp-validation-for="Surname" class="text-danger"></span>
+                <input asp-for="PhoneNumber" class="Logininput" placeholder="Phone Number">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                <input asp-for="CompanyName" class="Logininput" placeholder="Company Name">
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+                <input asp-for="Email" class="Logininput" placeholder="Email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="Password" class="Logininput" placeholder="Password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <input asp-for="ConfirmPassword" class="Logininput" placeholder="Confirm password">
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+                <button type="submit" class="Loginbutton">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+

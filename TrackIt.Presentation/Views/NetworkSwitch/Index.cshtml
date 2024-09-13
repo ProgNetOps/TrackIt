@@ -1,0 +1,126 @@
+﻿@model PagedList<NetworkSwitch>
+
+@{
+    int serial = 0;
+    string previousButtonDisabled = Model.HasPreviousPage ? string.Empty : "disabled";
+    string nextButtonDisabled = Model.HasNextPage ? string.Empty : "disabled"; 
+    string summary = $"Page {Model.PageIndex} of {Model.TotalNumberOfPages}: {ViewBag.TotalCount} results";
+
+}
+
+
+<section style="background-color: transparent;">
+
+    <form method="get" asp-controller="NetworkSwitch">
+
+        <div class=" p-2 mb-2 container" id="search-bar">
+
+            <div class="form-group" style="width:25%;">
+                <span>@summary</span>
+
+                <a asp-action="Index" asp-route-searchBy="@ViewData["CurrentSearchBy"]" asp-route-searchString="@ViewData["CurrentSearchString"]" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-white px-2 @previousButtonDisabled">
+                    <span style="font-weight:bold">&lt;</span>
+                </a>
+
+                <a asp-action="Index" asp-route-searchBy="@ViewData["CurrentSearchBy"]" asp-route-searchString="@ViewData["CurrentSearchString"]" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-white px-2 @nextButtonDisabled">
+                    <span style="font-weight:bold">&gt;</span>
+                </a>
+            </div>
+
+            <partial name="_SearchBarPartial" />
+
+            <div class="form-group px-2" style="width:10%">
+                <a asp-controller="DCNRouter" asp-action="Index" class="text-white" title="Clear All">
+                    <i class="fas fa-backspace"></i>
+                </a>
+            </div>
+        </div>
+
+        <section class="bodyWrapper">
+            <article style="display: flex;justify-content: center;align-items: center; min-height: 100vh;background: transparent; padding: 30px 0;">
+
+                <div class="wavyCardContainer">
+                    @if (!Model.Any())
+                    {
+                        <p class="text-center">No result</p>
+                    }
+
+                    else
+                    {
+                        foreach (var networkswitch in Model)
+                        {
+                            <div class="wavyCardBox" style="--clr:#ff5566cc;">
+                                <div class="content">
+                                    <img src="/img/Switch.png" />
+                                    <div class="content text-center">
+                                        <h2>@networkswitch.SwitchName</h2>
+                                         <h4 style="color:#fff">@networkswitch.ManagementIP</h4>
+                                        <p>
+                                            <a class="btn" asp-controller="NetworkSwitch" asp-action="Details" asp-route-id="@networkswitch.Id">Details</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+
+
+                @*  @if (!Model.Any())
+                 {
+                     <p class="text-center">No result</p>
+                 }
+
+                 else
+                 {
+                     <div class="table-container">
+
+                         <table class="table">
+                             <thead>
+                                 <tr>
+                                     <th>S/N</th>
+                                     <th>
+                                         <a asp-action="Index" asp-route-sortBy="@ViewData["NameSortParam"]">SWITCHES</a>
+                                     </th>
+                                     <th>
+                                         <a asp-action="Index" asp-route-sortBy="@ViewData["PoPSortParam"]">POP</a>
+                                     </th>
+                                     <th>
+                                         <a asp-action="Index" asp-route-sortBy="@ViewData["StateSortParam"]">STATE</a>
+                                     </th>
+                                     <th>MANAGEMENT IP</th>
+                                     <th>Actions</th>
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                 @foreach (var networkswitch in Model)
+                                 {
+                                     serial += 1;
+                                     <tr>
+                                         <td data-label="S/N">@serial</td>
+                                         <td data-label="SWITCHES">@networkswitch.SwitchName</td>
+                                         <td data-label="POP">@networkswitch.IPPoP.IPPoPName</td>
+                                         <td data-label="STATE">@networkswitch.IPPoP.BTS.State.StateName</td>
+                                         <td data-label="MANAGEMENT IP">@networkswitch.ManagementIP</td>
+                                         <td data-label="ActionS" style="color:var(--text-color);">
+                                             <a style="font-size:3vw;" asp-action="details" asp-route-id="@networkswitch.Id">
+                                                 <i class="bi bi-eye-fill"></i>
+                                             </a>
+                                         </td>
+                                     </tr>
+                                 }
+
+                             </tbody>
+                         </table>
+                     </div>
+        
+                    } 
+                *@
+
+                
+            </article>
+        </section>
+    </form>
+    @await Html.PartialAsync("_CreateNewPartial", "NetworkSwitch")
+
+</section>

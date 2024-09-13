@@ -1,0 +1,78 @@
+﻿@using TrackIt.Domain.Enums
+@model RegisterEmployeeViewModel;
+
+@{
+    Layout = "_EmptyLayout";
+}
+
+    <div class="signUpContainer">
+
+        @*  Background Video *@
+        <video autoplay loop muted playsinline class="background-clip">
+             @* <source src="/Glo Business Solutions.webm" type="Video/webm">  *@
+                <source src="~/video/market%20loop.mp4" type="video/mp4" />
+        </video>
+
+         @* Heading  *@
+        <div class="heading-container">
+            <h2 class="heading-text" data-text="Glo&nbsp;Enterprise&nbsp;Business">
+                Glo&nbsp;Enterprise&nbsp;Business
+            </h2>
+        </div>
+
+        <div class="LoginMain">
+        <input class="Logininput" type="checkbox" id="chk" aria-hidden="true">
+        <div class="signup text-center">
+                <form enctype="multipart/form-data" asp-action="Register" method="post">
+                @* <div asp-validation-summary="All" class="text-danger text-center"></div> *@
+                <label class="Loginlabel" for="chk" aria-hidden="true">Sign Up</label>
+               
+                <div style="display:flex; flex-direction:column; align-items: center;">
+                    <div class="col-sm-8 align-items-center mb-3">
+                        <select asp-for="GenderId" class="form-control form-select"
+                                asp-items="@ViewBag.Genders">
+                            <option selected disabled value="">Select Your Gender</option>
+                            </select>
+                        <span asp-validation-for="GenderId" class="text-danger"></span>
+
+                        
+                            
+                    </div>
+                    <div class="col-sm-8 align-items-center mb-3">
+                        <select asp-for="UnitId" class="form-control form-select" asp-items="ViewBag.Units">
+                            <option selected disabled value="">Select Department</option>
+                        </select>
+                        <span asp-validation-for="UnitId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <input asp-for="PhoneNumber" class="Logininput" placeholder="Official Phone Number">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                <input asp-for="Email" class="Logininput" placeholder="Official Email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="Password" class="Logininput" placeholder="Password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <input asp-for="ConfirmPassword" class="Logininput" placeholder="Confirm password">
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+                <div class="form-group row" style="width:80%; margin: auto">
+                    <label asp-for="Photo" class="row col-form-label">
+                        <i class="bi bi-person-circle text-white"> Profile Picture</i>
+                    </label>
+                    <div class="text-center row">
+                        <div class="custom-file">
+                            <input style="border-radius:5px;" asp-for="Photo" class="form-control custom-file-input">
+                        </div>
+                    </div>
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+                
+                <button type="submit" class="Loginbutton">Sign Up</button>
+                <p>Registered already? <a asp-action="Login">Login</a> </p>
+                </form>
+        </div>
+    </div>
+
+
+</div>
+

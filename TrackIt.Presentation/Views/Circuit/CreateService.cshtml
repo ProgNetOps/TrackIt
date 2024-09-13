@@ -1,0 +1,206 @@
+﻿@model CircuitCreateViewModel
+
+<div class="row">
+   <form method="post" asp-action="CreateService" class="mt-3 p-sm-5">
+      <div class="glass-pane p-5">
+            <div class="row p-md-5">
+                <div class="col-lg-4 col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="ClientId" class="custom-control-label text-white"></label>
+                        <select asp-for="ClientId" class="form-control form-select" asp-items="@ViewBag.Clients">
+                            <option disabled selected value="">Select Client's Name</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="ClientId"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="CircuitName" class="custom-control-label text-white"></label>
+                        <input asp-for="CircuitName"  class="form-control" >
+                        <span class="text-danger" asp-validation-for="CircuitName"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ServiceAddress" class="custom-control-label text-white"></label>
+                        <textarea asp-for="ServiceAddress" class="form-control"></textarea>
+                        <span class="text-danger" asp-validation-for="ServiceAddress"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Town" class="custom-control-label text-white"></label>
+                        <input asp-for="Town"  class="form-control">
+                        <span class="text-danger" asp-validation-for="Town"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="StateId" class="custom-control-label text-white"></label>
+                        <select asp-for="StateId" class="form-control form-select" asp-items="@ViewBag.States">
+                            <option disabled selected value="">Select State</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="StateId"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Longitude" class="custom-control-label text-white"></label>
+                        <input asp-for="Longitude" class="form-control">
+                        <span class="text-danger" asp-validation-for="Longitude"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Latitude" class="custom-control-label text-white"></label>
+                        <input asp-for="Latitude" class="form-control">
+                        <span class="text-danger" asp-validation-for="Latitude"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ServiceId" class="custom-control-label text-white"></label>
+                        <select asp-for="ServiceId" class="form-control form-select" asp-items="@ViewBag.Services">
+                            <option disabled selected value="">Select Service</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="ServiceId"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ServiceStartDate" class="custom-control-label text-white"></label>
+                        <input asp-for="ServiceStartDate" class="form-control">
+                        <span class="text-danger" asp-validation-for="ServiceStartDate"></span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="form-group mb-3">
+                        <label asp-for="AccountManager" class="custom-control-label text-white"></label>
+                        <input asp-for="AccountManager" class="form-control">
+                        <span class="text-danger" asp-validation-for="AccountManager"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ProjectManager" class="custom-control-label text-white"></label>
+                        <input asp-for="ProjectManager" class="form-control">
+                        <span class="text-danger" asp-validation-for="ProjectManager"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="AnnualRevenue" class="custom-control-label text-white"></label>
+                        <input asp-for="AnnualRevenue" class="form-control">
+                        <span class="text-danger" asp-validation-for="AnnualRevenue"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Bandwidth" class="custom-control-label text-white"></label>
+                        <input asp-for="Bandwidth" class="form-control">
+                        <span class="text-danger" asp-validation-for="Bandwidth"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="TransmissionPath" class="custom-control-label text-white"></label>
+                        <textarea asp-for="TransmissionPath" class="form-control"></textarea>
+                        <span class="text-danger" asp-validation-for="TransmissionPath"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="CircuitStateId" class="custom-control-label text-white"></label>
+                        <select asp-for="CircuitStateId" class="form-control form-select" asp-items="@ViewBag.CircuitStates">
+                            <option disabled selected value="">Current status</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="CircuitStateId"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="IPPoPId" class="custom-control-label text-white"></label>
+                        <select asp-for="IPPoPId" class="form-control form-select" asp-items="@ViewBag.IPPoPs">
+                            <option disabled selected value="">Select PoP</option>
+                        </select>
+                        <span class="text-danger" asp-validation-fr="IPPoPId"></span>
+                    </div>o
+
+                    <div class="form-group mb-3">
+                        <label asp-for="InstallersContactDetails" class="custom-control-label text-white"></label>
+                        <textarea asp-for="InstallersContactDetails" class="form-control"></textarea>
+                        <span class="text-danger" asp-validation-for="InstallersContactDetails"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ClientContactDetails" class="custom-control-label text-white"></label>
+                        <textarea asp-for="ClientContactDetails" class="form-control"></textarea>
+                        <span class="text-danger" asp-validation-for="ClientContactDetails"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="LastMileName" class="custom-control-label text-white"></label>
+                        <input asp-for="LastMileName" class="form-control">
+                        <span class="text-danger" asp-validation-for="LastMileName"></span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="form-group mb-3">
+                        <label asp-for="LastMileDeviceId" class="custom-control-label text-white"></label>
+                        <select asp-for="LastMileDeviceId" class="form-control form-select" asp-items="@ViewBag.LastMileDevices">
+                            <option disabled selected value="">Equipment Type</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="LastMileDeviceId"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="RadioFrequency" class="custom-control-label text-white"></label>
+                        <input asp-for="RadioFrequency" class="form-control">
+                        <span class="text-danger" asp-validation-for="RadioFrequency"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="LinkID" class="custom-control-label text-white"></label>
+                        <input asp-for="LinkID" class="form-control">
+                        <span class="text-danger" asp-validation-for="LinkID"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ODUSerialNumber" class="custom-control-label text-white"></label>
+                        <input asp-for="ODUSerialNumber" class="form-control">
+                        <span class="text-danger" asp-validation-for="ODUSerialNumber"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="IDUSerialNumber" class="custom-control-label text-white"></label>
+                        <input asp-for="IDUSerialNumber" class="form-control">
+                        <span class="text-danger" asp-validation-for="IDUSerialNumber"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="RadioFrequency" class="custom-control-label text-white"></label>
+                        <input asp-for="RadioFrequency" class="form-control">
+                        <span class="text-danger" asp-validation-for="RadioFrequency"></span>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="ServiceVLAN" class="custom-control-label text-white"></label>
+                        <input asp-for="ServiceVLAN" class="form-control">
+                        <span class="text-danger" asp-validation-for="ServiceVLAN"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ManagedRadioIPAtPoP" class="custom-control-label text-white"></label>
+                        <input asp-for="ManagedRadioIPAtPoP" class="form-control">
+                        <span class="text-danger" asp-validation-for="ManagedRadioIPAtPoP"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ManagedRadioIPAtClient" class="custom-control-label text-white"></label>
+                        <input asp-for="ManagedRadioIPAtClient" class="form-control">
+                        <span class="text-danger" asp-validation-for="ManagedRadioIPAtClient"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ManagedRadioIPGateway" class="custom-control-label text-white"></label>
+                        <input asp-for="ManagedRadioIPGateway" class="form-control">
+                        <span class="text-danger" asp-validation-for="ManagedRadioIPGateway"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="AssignedPublicIP" class="custom-control-label text-white"></label>
+                        <input asp-for="AssignedPublicIP" class="form-control">
+                        <span class="text-danger" asp-validation-for="AssignedPublicIP"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="AssignedGateway" class="custom-control-label text-white"></label>
+                        <input asp-for="AssignedGateway" class="form-control">
+                        <span class="text-danger" asp-validation-for="AssignedGateway"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="AssignedSubnetMask" class="custom-control-label text-white"></label>
+                        <input asp-for="AssignedSubnetMask" class="form-control">
+                        <span class="text-danger" asp-validation-for="AssignedSubnetMask"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group row text-center m-5">
+                <div class=" col-4 offset-4" style="position:relative;">
+                    <button type="submit" class="shinyButton">Create Service</button>
+                </div>
+            </div>
+                
+       </div>
+   </form>
+
+</div>
