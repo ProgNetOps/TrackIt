@@ -11,85 +11,85 @@
 
     <form method="get" asp-controller="Administration">
 
-    <div class=" p-2 mb-2 container" id="search-bar">
+        <div class=" p-2 mb-2 container" id="search-bar">
 
-        <div class="form-group" style="width:25%;">
+            <div class="form-group" style="width:25%;">
                 <span>@total</span>
-            <a asp-action="AllUsers" asp-route-searchBy="@ViewData["CurrentSearchBy"]" asp-route-searchString="@ViewData["CurrentSearchString"]" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-white px-2 @previousButtonDisabled">
-                <span style="font-weight:bold">&lt;</span>
-            </a>
-            <a asp-action="AllUsers" asp-route-searchBy="@ViewData["CurrentSearchBy"]" asp-route-searchString="@ViewData["CurrentSearchString"]" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-white px-2 @nextButtonDisabled">
-                <span style="font-weight:bold">&gt;</span>
-            </a>
+                <a asp-action="AllUsers" asp-route-searchBy="@ViewData["CurrentSearchBy"]" asp-route-searchString="@ViewData["CurrentSearchString"]" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-white px-2 @previousButtonDisabled">
+                    <span style="font-weight:bold">&lt;</span>
+                </a>
+                <a asp-action="AllUsers" asp-route-searchBy="@ViewData["CurrentSearchBy"]" asp-route-searchString="@ViewData["CurrentSearchString"]" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-white px-2 @nextButtonDisabled">
+                    <span style="font-weight:bold">&gt;</span>
+                </a>
+            </div>
+
+            <partial name="_SearchBarPartial" />
+
+            <div class="form-group px-2" style="width:10%">
+                <a asp-controller="Administration" asp-action="AllUsers" class="text-white" title="Clear All">
+                    <i class="fas fa-backspace"></i>
+                </a>
+            </div>
         </div>
 
-        <partial name="_SearchBarPartial" />
+        <article class="bodyWrapper">
 
-        <div class="form-group px-2" style="width:10%">
-            <a asp-controller="Administration" asp-action="AllUsers" class="text-white" title="Clear All">
-                <i class="fas fa-backspace"></i>
-            </a>
-        </div>
-    </div>
+            @if (!Model.Any())
+            {
+                <p class="text-center">Nothing to display</p>
+            }
+            else
+            {
+                <section class="album">
+                    @foreach (var user in Model)
+                    {
+                        @* string photoPath = "~/images/" + (user?.PhotoPath ?? "noimage.png");*@
+                        string? photoPath = null;
 
-    <article class="bodyWrapper">
-     
-       @if (!Model.Any())
-       {
-           <p class="text-center">Nothing to display</p>
-       }
-       else
-       {
-           <section class="album">
-               @foreach (var user in Model)
-               {
-                    @* string photoPath = "~/images/" + (user?.PhotoPath ?? "noimage.png");*@
-                    string? photoPath = null;
-
-               if (user is Employee employee)
-               {
+                        if (user is Employee employee)
+                        {
                             if (employee.GenderId.ToString().StartsWith("823"))
-                   {
-                       photoPath = "~/Images/" + (user?.PhotoPath ?? "malestaff.jpg");
-                   }
+                            {
+                                photoPath = "~/Images/" + (user?.PhotoPath ?? "malestaff.jpg");
+                            }
                             else if (employee.GenderId.ToString().StartsWith("B0C"))
-                   {
-                       photoPath = "~/Images/" + (user?.PhotoPath ?? "femalestaff.jpg");
-                   }
-               }
-               else
-               {
-                   photoPath = "~/Images/" + (user?.PhotoPath ?? "noimage.png");
-               }
+                            {
+                                photoPath = "~/Images/" + (user?.PhotoPath ?? "femalestaff.jpg");
+                            }
+                        }
+                        else
+                        {
+                            photoPath = "~/images/" + (user?.PhotoPath ?? "noimage.png");
+                        }
 
-                   <div class="photo">
-                       <div class="imgBox">
-                           <img src="@photoPath" asp-append-version="true" />
-                       </div>
-                       <div class="details">
-                           <h2>@user.Surname @user.FirstName</h2>
+                        <div class="photo">
+                            <div class="imgBox">
+                                <img src="@photoPath" asp-append-version="true" />
+                            </div>
+                            <div class="details">
+                                <h2>@user.Surname @user.FirstName</h2>
 
-                           <div>
-                               <span>@user.Email</span> <br>
-                           </div>
-                           <div>
-                               <span>@user.PhoneNumber</span> <br>
-                           </div>                            
-                       </div>
+                                <div>
+                                    <span>@user.Email</span> <br>
+                                </div>
+                                <div>
+                                    <span>@user.PhoneNumber</span> <br>
+                                </div>
+                            </div>
 
-                       <div style="position: absolute; left:50%;transform:translateX(-50%); bottom:5%; width:80%;text-align:center; margin:auto;">
-                           <a style="width:100%;" class="btn btn-primary" asp-controller="Administration" asp-action="UserDetails" asp-route-id="@user.Id">Details</a>
-                       </div>
+                            <div style="position: absolute; left:50%;transform:translateX(-50%); bottom:5%; width:80%;text-align:center; margin:auto;">
+                                <a style="width:100%;" class="btn btn-primary" asp-controller="Administration" asp-action="UserDetails" asp-route-id="@user.Id">Details</a>
+                            </div>
 
-                       <a style="position: absolute; top:30%; left:50%; transform:translateX(-50%); width:5vw;height:5vw;" asp-controller="Administration" asp-action="EditUser" asp-route-id="@user.Id" class="fixed-button"> <i class="fas fa-pen" id="icon"></i> </a>
-                                               
-                   </div>
+                            <a style="position: absolute; top:30%; left:50%; transform:translateX(-50%); width:5vw;height:5vw;" asp-controller="Administration" asp-action="EditUser" asp-route-id="@user.Id" class="fixed-button"> <i class="fas fa-pen" id="icon"></i> </a>
 
-               }
-           </section>
-       }
-        
-    </article>
+                        </div>
+
+                    }
+                </section>
+            }
+
+        </article>
 
     </form>
 

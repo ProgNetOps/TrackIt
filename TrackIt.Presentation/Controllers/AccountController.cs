@@ -62,15 +62,14 @@ public class AccountController(IAccountService service,
                 await signInManager.SignInAsync(empUser, isPersistent: false);
                
                 //Define some claim types and their values
-                new Claim(ClaimTypes.Email, empUser.Email.Substring(7,10));
+                new Claim(ClaimTypes.Email, empUser.Email);
                 new Claim(ClaimTypes.Surname, empUser.Surname);
                 new Claim("Phone Number", empUser.PhoneNumber);
                 new Claim(ClaimTypes.OtherPhone, empUser.AlternateNumber??"");
-                new Claim(ClaimTypes.Locality, empUser.State.StateName??"");
+                new Claim(ClaimTypes.Locality, empUser.State?.StateName??"");
                 new Claim(ClaimTypes.Gender, empUser.Gender.Name);
                 new Claim(ClaimTypes.StreetAddress, empUser.OfficeAddress??"");
                 new Claim("Category of User", user.GetType().ToString());
-
 
                 return RedirectToAction("EditUser", "Administration", new { user.Id });
             }
