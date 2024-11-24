@@ -19,9 +19,13 @@
 
             <div class="form-group" style="width:25%;">
                 <span>@summary</span>
-            <a asp-action="Index" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-white px-2 @previousButtonDisabled">Previous</a>
+            <a asp-action="Index" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-white px-2 @previousButtonDisabled">
+                    <span style="font-weight:bold">&lt;</span>
+            </a>
 
-            <a asp-action="Index" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-white px-2 @nextButtonDisabled">Next</a>
+            <a asp-action="Index" asp-route-sortBy="@ViewData["CurrentSort"]" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-white px-2 @nextButtonDisabled">
+                    <span style="font-weight:bold">&gt;</span>
+            </a>
         </div>
         
         <partial name="_SearchBarPartial" />

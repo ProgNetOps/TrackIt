@@ -35,10 +35,16 @@ public class RegisterViewModel
     public string PhoneNumber { get; set; }
 
 
-    [Required(ErrorMessage = "Create a strong password")]
+    [Required(ErrorMessage = $"Password MUST contain AT LEAST " +
+        $"8 characters, " +
+        $"one digit, " +
+        $"one uppercase letter, " +
+        $"3 unique characters, " +
+        $"one special character eg @#^&$~!%")]
     [Display(Name = "Password")]
     [DataType(DataType.Password)]
     public string Password { get; set; }
+
 
     [Required(ErrorMessage = "Confirm your password")]
     [Display(Name = "Confirm Password")]
@@ -46,12 +52,14 @@ public class RegisterViewModel
     [DataType(DataType.Password)]
     public string ConfirmPassword { get; set; }
 
+    
     [Display(Name = "Profile Picture")]
-    [PermittedFileExtensions(["jpg","jpeg","png"])]
-    [MaximumFileSize(1,ErrorMessage ="Maximum file size is 1Mb")]
     public IFormFile? Photo { get; set; }
 
     
     [Required(ErrorMessage = "Select your gender")]
-    public UserGender Gender { get; set; }
+    //public UserGender Gender { get; set; }
+    public int? GenderId { get; set; }
+    [ForeignKey(nameof(GenderId))]
+    public Gender? Gender { get; set; }
 }

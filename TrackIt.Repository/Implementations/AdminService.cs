@@ -118,14 +118,7 @@ public class AdminService(RoleManager<IdentityRole> roleManager,
         //Filtering                        
         if (string.IsNullOrWhiteSpace(filterOn) == false && string.IsNullOrWhiteSpace(filterQuery) == false)
         {
-            if (filterOn.Equals(nameof(ApplicationUser.Surname), StringComparison.OrdinalIgnoreCase))
-            {
-                users = users.Where(q => q.Surname.Contains(filterQuery));
-            }
-            if (filterOn.Equals(nameof(ApplicationUser.FirstName), StringComparison.OrdinalIgnoreCase))
-            {
-                users = users.Where(q => q.FirstName.Contains(filterQuery));
-            }
+            
             if (filterOn.Equals(nameof(ApplicationUser.Email), StringComparison.OrdinalIgnoreCase))
             {
                 users = users.Where(q => q.Email.Contains(filterQuery));
@@ -143,18 +136,7 @@ public class AdminService(RoleManager<IdentityRole> roleManager,
         //Sorting
         switch (sortBy)
         {
-            case "surname_desc":
-                users = users.OrderByDescending(q => q.Surname);
-                break;
-            case "surname":
-                users = users.OrderBy(q => q.Surname);
-                break;
-            case "firstname_desc":
-                users = users.OrderByDescending(q => q.FirstName);
-                break;
-            case "firstname":
-                users = users.OrderBy(q => q.FirstName);
-                break;
+           
             case "email_desc":
                 users = users.OrderByDescending(q => q.Email);
                 break;
@@ -162,10 +144,7 @@ public class AdminService(RoleManager<IdentityRole> roleManager,
                 users = users.OrderBy(q => q.Email);
                 break;
 
-            //The default is ordering by name
-            default:
-                users = users.OrderBy(q => q.FirstName);
-                break;
+            
         }
 
         pageNumber ??= 1;
@@ -205,27 +184,22 @@ public class AdminService(RoleManager<IdentityRole> roleManager,
         {
             var response = new EditUserDropdownViewModel()
             {
-                LineManagers = GetAllUsers()?.
-                Where(q => q.FullName.Count() > 6).
-                OrderBy(q => q.FullName).
-                ToList(),
-
-                //LineManagers = GetAllUsers()?.
+                //LineManagers = context.Employees.
                 //Where(q => roleManager.Roles.
                 //Select(x => x.Name).ToList().
-                //Contains("Line Manager"),
+                //Contains("Line Manager")
 
-                OfficeLocations = context.States.
-                OrderBy(q => q.StateName).
-                AsNoTracking().
-                ToList(),
+                //OfficeLocations = context.States.
+                //OrderBy(q => q.StateName).
+                //AsNoTracking().
+                //ToList(),
 
-                UserCategories = await context.UserCategories.
-                Where(q => q.CategoryOfApplicationUser.
-                Contains("Staff")).
-                OrderBy(q => q.CategoryOfApplicationUser).
-                AsNoTracking().
-                ToListAsync(),
+                //UserCategories = await context.UserCategories.
+                //Where(q => q.CategoryOfApplicationUser.
+                //Contains("Staff")).
+                //OrderBy(q => q.CategoryOfApplicationUser).
+                //AsNoTracking().
+                //ToListAsync(),
             };
             return response;
         }
@@ -233,15 +207,11 @@ public class AdminService(RoleManager<IdentityRole> roleManager,
         {
             var response = new EditUserDropdownViewModel()
             {
-                LineManagers = GetAllUsers()?.
-                Where(q => q.FullName.Count() > 6).
-                OrderBy(q => q.FullName).
-                ToList(),
+                //LineManagers = context.Employees.
+                //Where(q => q.FullName.Count() > 6).
+                //OrderBy(q => q.FullName).
+                //ToList(),
 
-                //LineManagers = GetAllUsers()?.
-                //Where(q => roleManager.Roles.
-                //Select(x => x.Name).ToList().
-                //Contains("Line Manager"),
 
                 OfficeLocations = context.States.
                 OrderBy(q => q.StateName).

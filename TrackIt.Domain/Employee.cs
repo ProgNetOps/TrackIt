@@ -14,6 +14,14 @@ public class Employee:ApplicationUser
     public string? LineManagerId { get; set; }
     [ForeignKey(nameof(LineManagerId))]
     public Employee? LineManager { get; set; }
+    [Display(Name = "First Name")]
+    [StringLength(20)]
+    public string? FirstName { get; set; }
+
+    [StringLength(20)]
+    public string? Surname { get; set; }
+    public string? FullName => $"{Surname} {FirstName} - {PhoneNumber}";
+
 
     [DataType(DataType.Date)]
     [Display(Name = "Onboarding Date")]
@@ -32,4 +40,6 @@ public class Employee:ApplicationUser
     public Guid? GenderId { get; set; }
     [ForeignKey(nameof(GenderId))]
     public Gender? Gender { get; set; }
+
+
 }

@@ -34,7 +34,7 @@
 
         <article class="bodyWrapper">
 
-            @if (!Model.Any())
+            @if (Model.Any() is false)
             {
                 <p class="text-center">Nothing to display</p>
             }
@@ -48,11 +48,13 @@
 
                         if (user is Employee employee)
                         {
-                            if (employee.GenderId.ToString().StartsWith("823"))
+                            @* if (employee.GenderId.ToString().StartsWith("823")) *@
+                            if(employee?.Gender?.Name.ToLower() == "male")
                             {
                                 photoPath = "~/Images/" + (user?.PhotoPath ?? "malestaff.jpg");
                             }
-                            else if (employee.GenderId.ToString().StartsWith("B0C"))
+                            @* else if (employee.GenderId.ToString().StartsWith("B0C")) *@
+                            else
                             {
                                 photoPath = "~/Images/" + (user?.PhotoPath ?? "femalestaff.jpg");
                             }
@@ -67,7 +69,17 @@
                                 <img src="@photoPath" asp-append-version="true" />
                             </div>
                             <div class="details">
-                                <h2>@user.Surname @user.FirstName</h2>
+
+                                @{
+                                    string tag = user is Employee staff ?
+                                    $"{staff.Surname} {staff.FirstName}" :
+                                    user is TechnologyPartner techPartner ?
+                                    $"{techPartner.CompanyName}" :
+                                    user is Customer customer ?
+                                    $"{customer.CompanyName}" : "";
+                                }
+
+                                <h2>@tag</h2>
 
                                 <div>
                                     <span>@user.Email</span> <br>

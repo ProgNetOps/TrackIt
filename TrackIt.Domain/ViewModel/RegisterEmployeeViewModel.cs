@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrackIt.CustomValidations;
 
 namespace TrackIt.Domain.ViewModel;
 
@@ -19,7 +20,9 @@ public class RegisterEmployeeViewModel: RegisterViewModel
     [Display(Name ="Gender")]
     public Guid? GenderId { get; set; }
 
-    [Required(ErrorMessage ="Profile picture is required")]
-    public IFormFile? Photo { get; set; }
 
+    //[Required(ErrorMessage = "Profile picture is required")]
+    [PermittedFileExtensions(["jpg", "jpeg", "png"])]
+    [MaximumFileSize(1, ErrorMessage = "Maximum file size is 1Mb")]
+    public IFormFile? Photo { get; set; }
 }

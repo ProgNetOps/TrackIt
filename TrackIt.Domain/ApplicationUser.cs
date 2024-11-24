@@ -9,14 +9,7 @@ namespace TrackIt.Domain;
 /// </summary>
 public abstract class ApplicationUser:IdentityUser
 {
-    [Display(Name = "First Name")]
-    [StringLength(20)]
-    public string? FirstName { get; set; }
-
-    [StringLength(20)]
-    public string? Surname { get; set; }
-    public string? FullName => $"{Surname} {FirstName} - {PhoneNumber}";
-     
+   
     public Guid UserCategoryId { get; set; }
     [ForeignKey(nameof(UserCategoryId))]
     public UserCategory UserCategory { get; set; }

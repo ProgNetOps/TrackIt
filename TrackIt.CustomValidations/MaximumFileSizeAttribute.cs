@@ -18,6 +18,6 @@ public class MaximumFileSizeAttribute(int maxFileSize) : ValidationAttribute
         var file = value as IFormFile;
         byte maxFileSizeInBytes = Convert.ToByte(maxFileSize);
 
-        return file is null || file.Length < maxFileSizeInBytes;        
+        return file is not null && file.Length <= maxFileSizeInBytes;        
     }
 }

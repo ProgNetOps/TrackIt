@@ -8,7 +8,7 @@ namespace TrackIt.Presentation.Utilities
     /// <summary>
     ///This class retrieves information about the logged in user
     /// </summary>
-    public class ApplicationuserClaimsPrincipalFactory:UserClaimsPrincipalFactory<ApplicationUser,IdentityRole>
+    public class ApplicationuserClaimsPrincipalFactory:UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>
     {
         public ApplicationuserClaimsPrincipalFactory(UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
@@ -24,10 +24,13 @@ namespace TrackIt.Presentation.Utilities
         {
             var identity = await base.GenerateClaimsAsync(user);
             
-            identity.AddClaim(new Claim("FirstName", user.FirstName ?? string.Empty));
+            if(user is Employee emloyee)
+            {
+                identity.AddClaim(new Claim("FirstName", emloyee.FirstName ?? string.Empty));
+                identity.AddClaim(new Claim("Surname", emloyee.Surname ?? string.Empty));
+                identity.AddClaim(new Claim("FullName", emloyee.FullName ?? string.Empty));
+            }
             identity.AddClaim(new Claim("Id", user.Id ?? string.Empty));
-            identity.AddClaim(new Claim("Surname", user.Surname ?? string.Empty));
-            identity.AddClaim(new Claim("FullName", user.FullName ?? string.Empty));
             identity.AddClaim(new Claim("Phone", user.PhoneNumber ?? string.Empty));
             
             return identity;

@@ -5,13 +5,28 @@
     string? photoPath = null;
 
     //The Gender ID GUID values from the database
-    if (Model.GenderId.ToString().StartsWith("823"))
+    // if (Model.GenderId.ToString().StartsWith("823"))
+    // {
+    //     photoPath = "~/Images/" + (Model.ExistingPhotoPath ?? "malestaff.jpg");
+    // }
+    // else if (Model.GenderId.ToString().StartsWith("B0C"))
+    // {
+    //     photoPath = "~/Images/" + (Model.ExistingPhotoPath ?? "femalestaff.jpg");
+    // }
+    // else
+    // {
+    //     photoPath = "~/Images/" + (Model.ExistingPhotoPath ?? "noimage.png");
+    // }
+
+
+    if (Model.Gender?.Name.ToLower() is "male")
     {
         photoPath = "~/Images/" + (Model.ExistingPhotoPath ?? "malestaff.jpg");
     }
-    else if (Model.GenderId.ToString().StartsWith("B0C"))
+    else if (Model.Gender?.Name.ToLower() is "female")
     {
         photoPath = "~/Images/" + (Model.ExistingPhotoPath ?? "femalestaff.jpg");
+
     }
     else
     {
@@ -20,136 +35,136 @@
 }
 
 <div class="row">
-   <form enctype="multipart/form-data" method="post" asp-action="EditUser" class="mt-3 p-sm-5">
-       <input hidden asp-for="ExistingPhotoPath" />
-       <div class="glass-pane p-5">
-           <div class="row p-md-5">
-               <div class="col-md-6">
-                   <div class="form-group mb-3">
-                       <label asp-for="Id" class="custom-control-label text-white"></label>
-                       <input asp-for="Id" disabled class="form-control">
-                   </div>
-                 <div class="form-group mb-3">
-                     <label asp-for="OfficeAddress" class="custom-control-label text-white"></label>
-                     <textarea asp-for="OfficeAddress" class="form-control" placeholder="Office Address"></textarea>
-                     <span asp-validation-for="OfficeAddress" class="text-danger"></span>
-                 </div>
+    <form enctype="multipart/form-data" method="post" asp-action="EditUser" class="mt-3 p-sm-5">
+        <input hidden asp-for="ExistingPhotoPath" />
+        <div class="glass-pane p-5">
+            <div class="row p-md-5">
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="Id" class="custom-control-label text-white"></label>
+                        <input asp-for="Id" disabled class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="OfficeAddress" class="custom-control-label text-white"></label>
+                        <textarea asp-for="OfficeAddress" class="form-control" placeholder="Office Address"></textarea>
+                        <span asp-validation-for="OfficeAddress" class="text-danger"></span>
+                    </div>
 
-                @*  <div class="form-group mb-3">
+                    @*  <div class="form-group mb-3">
                      <label asp-for="CategoryOfUser" class="custom-control-label text-white"></label>
                      <input asp-for="CategoryOfUser" disabled class="form-control" value="@Enum.GetName(typeof(CategoryOfUser),CategoryOfUser)">
                      <span asp-validation-for="CategoryOfUser" class="text-danger"></span>
                  </div> *@
-                 <div class="form-group mb-3">
-                     <label asp-for="UserCategoryId" class="custom-control-label text-white"></label>
+                    <div class="form-group mb-3">
+                        <label asp-for="UserCategoryId" class="custom-control-label text-white"></label>
                         <select asp-for="UserCategoryId" class="form-control form-select" asp-items="ViewBag.UserCategories">
                             <option disabled selected>Select Category</option>
                         </select>
                         <span asp-validation-for="UserCategoryId" class="text-danger"></span>
-                 </div>
-                   <div class="form-group mb-3">
-                       <label asp-for="OfficeLocation" class="custom-control-label text-white"></label>
-                       <select asp-for="OfficeLocation" class="form-control form-select" asp-items="ViewBag.OfficeLocations">
-                         <option disabled selected>Select Location</option>
-                       </select>
-                       <span asp-validation-for="OfficeLocation" class="text-danger"></span>
-                   </div>
-               </div>
-               <div class="col-md-6">
-                   <div class="form-group mb-3">
-                       <label asp-for="OnboardingDate" class="custom-control-label text-white"></label>
-                       <input asp-for="OnboardingDate" class="form-control"  />
-                       <span asp-validation-for="OnboardingDate" class="text-danger"></span>
-                   </div>
-                   <div class="form-group mb-3">
-                       <label asp-for="AlternateNumber" class="custom-control-label text-white"></label>
-                       <input asp-for="AlternateNumber" class="form-control" placeholder="Alternate phone">
-                       <span asp-validation-for="AlternateNumber" class="text-danger"></span>
-                   </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="OfficeLocation" class="custom-control-label text-white"></label>
+                        <select asp-for="OfficeLocation" class="form-control form-select" asp-items="ViewBag.OfficeLocations">
+                            <option disabled selected>Select Location</option>
+                        </select>
+                        <span asp-validation-for="OfficeLocation" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label asp-for="OnboardingDate" class="custom-control-label text-white"></label>
+                        <input asp-for="OnboardingDate" class="form-control" />
+                        <span asp-validation-for="OnboardingDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="AlternateNumber" class="custom-control-label text-white"></label>
+                        <input asp-for="AlternateNumber" class="form-control" placeholder="Alternate phone">
+                        <span asp-validation-for="AlternateNumber" class="text-danger"></span>
+                    </div>
 
-                   <div class="form-group mb-3">
-                       <label asp-for="LineManager" class="custom-control-label text-white"></label>s
+                    @* <div class="form-group mb-3">
+                       <label asp-for="LineManager" class="custom-control-label text-white"></label>
                         <select asp-for="LineManager" class="form-control form-select" asp-items="ViewBag.LineManagers">
                            <option disabled selected>Select Manager</option>
                        </select>
                        <span asp-validation-for="LineManager" class="text-danger"></span>
+                   </div> *@
+                </div>
+            </div>
+            <div class="row p-md-5">
+                <div class="form-group row m-3">
+                    <label asp-for="Photo" class="col-md-3 col-form-label text-white"></label>
+                    <div class="custom-file col-md-9">
+                        <input asp-for="Photo" class="form-control custom-file-input" id="custom-file-input">
+                        @* <label class="custom-file-label">Click here to change photo</label> *@                       
                    </div>
-               </div>                  
-           </div>
-           <div class="row p-md-5">
-               <div class="form-group row m-3">
-                   <label asp-for="Photo" class="col-md-3 col-form-label text-white"></label>
-                   <div class="custom-file col-md-9">
-                           <input asp-for="Photo" class="form-control custom-file-input" id="custom-file-input">
-                           @* <label class="custom-file-label">Click here to change photo</label> *@                       
-                   </div>
-               </div>
+                </div>
 
-               <div class="form-group col-md-6 offset-md-3 mb-3">
-                   <img style="width:100%; height:auto;" src="@photoPath" class="imageThumbnail" asp-append-version="true" />
-               </div>
+                <div class="form-group col-md-6 offset-md-3 mb-3">
+                    <img style="width:100%; height:auto;" src="@photoPath" class="imageThumbnail" asp-append-version="true" />
+                </div>
 
-               <div class="form-group row mb-3">
-                   <div class="row">
-                       <button type="submit" class="btn btn-primary col-5 ">Update</button>
-                       <a asp-action="AllUsers" class="btn btn-primary offset-2 col-5">Cancel</a>
-                   </div>
-               </div>
-           </div>
+                <div class="form-group row mb-3">
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary col-5 ">Update</button>
+                        <a asp-action="AllUsers" class="btn btn-primary offset-2 col-5">Cancel</a>
+                    </div>
+                </div>
+            </div>
 
-           <hr style="height:5px; color:#fff" />
+            <hr style="height:5px; color:#fff" />
 
-           <div class="card m-3 p-md-5">
-               <div class="card-header">
-                   <h3>User Roles</h3>
-               </div>
-               <div class="card-body">
-                   @if (Model.Roles.Any())
-                   {
-                       foreach (var role in Model.Roles)
-                       {
-                           <h5 class="card-title">@role</h5>
-                       }
-                   }
-                   else
-                   {
-                       <h5 class="card-title">None at the moment</h5>
-                   }
-               </div>
-               <div class="card-footer">
-                 <a asp-action="ManageUserRoles" asp-route-userId="@Model.Id" style="width:auto" class="btn btn-primary">
-                       Manage Roles
-                   </a>
-               </div>
-           </div>
+            <div class="card m-3 p-md-5">
+                <div class="card-header">
+                    <h3>User Roles</h3>
+                </div>
+                <div class="card-body">
+                    @if (Model.Roles.Any())
+                    {
+                        foreach (var role in Model.Roles)
+                        {
+                            <h5 class="card-title">@role</h5>
+                        }
+                    }
+                    else
+                    {
+                        <h5 class="card-title">None at the moment</h5>
+                    }
+                </div>
+                <div class="card-footer">
+                    <a asp-action="ManageUserRoles" asp-route-userId="@Model.Id" style="width:auto" class="btn btn-primary">
+                        Manage Roles
+                    </a>
+                </div>
+            </div>
 
-           <hr style="height:5px; color:#fff" />
+            <hr style="height:5px; color:#fff" />
 
-           <div class="card m-3 p-md-5">
-               <div class="card-header">
-                   <h3>User Claims</h3>
-               </div>
-               <div class="card-body">
-                   @if (Model.Claims.Any())
-                   {
-                       foreach (var claim in Model.Claims)
-                       {
-                           <h5 class="card-title">@claim</h5>
-                       }
-                   }
-                   else
-                   {
-                       <h5 class="card-title">None at the moment</h5>
-                   }
-               </div>
-               <div class="card-footer">
-                   <a asp-action="ManageUserClaims" asp-route-userId="@Model.Id"
-                      style="width:auto" class="btn btn-primary">
-                       Manage Claims
-                   </a>
-               </div>
-           </div>
+            <div class="card m-3 p-md-5">
+                <div class="card-header">
+                    <h3>User Claims</h3>
+                </div>
+                <div class="card-body">
+                    @if (Model.Claims.Any())
+                    {
+                        foreach (var claim in Model.Claims)
+                        {
+                            <h5 class="card-title">@claim</h5>
+                        }
+                    }
+                    else
+                    {
+                        <h5 class="card-title">None at the moment</h5>
+                    }
+                </div>
+                <div class="card-footer">
+                    <a asp-action="ManageUserClaims" asp-route-userId="@Model.Id"
+                       style="width:auto" class="btn btn-primary">
+                        Manage Claims
+                    </a>
+                </div>
+            </div>
 
-       </div>
-   </form>
+        </div>
+    </form>
 </div>

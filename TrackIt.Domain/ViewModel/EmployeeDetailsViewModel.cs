@@ -25,11 +25,9 @@ namespace TrackIt.Domain.ViewModel
         [ForeignKey(nameof(UnitId))]
         public Unit? Unit { get; set; }
 
-
         [Phone]
         [Display(Name = "Alternate Number")]
         public string? AlternateNumber { get; set; }
-
 
         [DataType(DataType.Date)]
         [Display(Name = "Onboarding Date")]

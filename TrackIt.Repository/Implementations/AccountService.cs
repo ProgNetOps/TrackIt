@@ -59,7 +59,7 @@ public class AccountService(UserManager<ApplicationUser> userManager,
 
     public async Task<(ApplicationUser? user, IdentityResult? result)> CreateUserAsync(RegisterEmployeeViewModel? userModel)
     {
-        string? uniqueFileName = ProcessUploadedFile(userModel);
+        //string? uniqueFileName = ProcessUploadedFile(userModel);
 
         Employee appUser = new Employee()
         {
@@ -68,7 +68,7 @@ public class AccountService(UserManager<ApplicationUser> userManager,
             UnitId = userModel.UnitId,
             PhoneNumber = userModel.PhoneNumber,
             UserCategoryId = Guid.Parse("58B3483A-E72D-4768-8591-B5DA96F42896"),
-            PhotoPath = uniqueFileName,
+            PhotoPath = ProcessUploadedFile(userModel),
             GenderId = userModel.GenderId
         };
 
@@ -94,8 +94,6 @@ public class AccountService(UserManager<ApplicationUser> userManager,
             {
                 Email = userModel.Email,
                 UserName = userModel.Email,
-                FirstName = userModel.FirstName,
-                Surname = userModel.Surname,
                 PhoneNumber= userModel.PhoneNumber,
                 CompanyName = userModel.CompanyName,
                 UserCategoryId = userModel.UserCategoryId,
@@ -110,8 +108,6 @@ public class AccountService(UserManager<ApplicationUser> userManager,
             TechnologyPartner appUser = new TechnologyPartner()
             {
                 Email = userModel.Email,
-                FirstName = userModel.FirstName,
-                Surname = userModel.Surname,
                 UserName = userModel.Email,
                 PhoneNumber = userModel.PhoneNumber,
                 CompanyName = userModel.CompanyName,

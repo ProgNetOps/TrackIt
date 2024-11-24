@@ -10,7 +10,8 @@ using TrackIt.Repository.Services;
 namespace TrackIt.Presentation.Controllers;
 
 public class AccountController(IAccountService service, 
-    SignInManager<ApplicationUser> signInManager) : Controller
+    SignInManager<ApplicationUser> signInManager,
+    UserManager<ApplicationUser> userManager, ILogger<String> logger) : Controller
 {
     [ViewData]
     public string Title { get; set; } = string.Empty;
@@ -58,24 +59,23 @@ public class AccountController(IAccountService service,
             else
             {
                 Employee empUser = user as Employee;
-
                 await signInManager.SignInAsync(empUser, isPersistent: false);
-               
+
                 //Define some claim types and their values
                 new Claim(ClaimTypes.Email, empUser.Email);
                 new Claim(ClaimTypes.Surname, empUser.Surname);
                 new Claim("Phone Number", empUser.PhoneNumber);
-                new Claim(ClaimTypes.OtherPhone, empUser.AlternateNumber??"");
-                new Claim(ClaimTypes.Locality, empUser.State?.StateName??"");
-                new Claim(ClaimTypes.Gender, empUser.Gender.Name);
-                new Claim(ClaimTypes.StreetAddress, empUser.OfficeAddress??"");
-                new Claim("Category of User", user.GetType().ToString());
 
-                return RedirectToAction("EditUser", "Administration", new { user.Id });
+                return RedirectToAction("EditUser", "Administration", new { id = user.Id });
             }
         }
         else
         {
+            
+            //var errors = ModelState
+            //    .Where(x => x.Value.Errors.Count > 0)
+            //    .Select(x => new { x.Key, x.Value.Errors })
+            //    .ToArray();
             return View(userModel);
         }
     }
@@ -155,7 +155,8 @@ public class AccountController(IAccountService service,
                 }
                 else
                 {
-                    return RedirectToAction("Welcome", "Home");
+                    //return RedirectToAction("Welcome", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             else
@@ -198,5 +199,43 @@ public class AccountController(IAccountService service,
 
         return result ? Json($"{email} is already in use") : Json(result);
     }
+
+
+    [HttpGet]
+    [AllowAnonymous]
+    public IActionResult ForgotPassword()
+    {
+        return View();
+    }
+
+
+    [HttpPost]
+    [AllowAnonymous]
+    public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = await userManager.FindByEmailAsync(model.Email);
+            if (user is not null && await userManager.IsEmailConfirmedAsync(user))
+            {
+                var token = await userManager.GeneratePasswordResetTokenAsync(user);
+
+                var passwordResetLink = Url.Action("ResetPassword", "Account", new { email = model.Email, token = token }, Request.Scheme);
+
+                logger.Log(LogLevel.Warning, passwordResetLink);
+
+                return View("ForgotPasswordConfirmation");
+            }
+            else
+            {
+                return View("ForgotPasswordConfirmation");
+            }
+        }
+        else
+        {
+            return View(model);
+        }
+    }
+
 
 }

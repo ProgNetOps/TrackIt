@@ -154,7 +154,7 @@ public class AdministrationController(IAdminService service,
     {
 		ActionName = "CreateRole";//string passed to the partial view
 		Title = "All Roles";
-        PageHeader = "Role Based Access Control (RBAC)";
+        PageHeader = "Access Control (RBAC)";
 
         var roles = service.GetAllRoles();
         return View(roles);
@@ -320,8 +320,6 @@ public class AdministrationController(IAdminService service,
             var userDetailsViewModel = new UserDetailsViewModel
             {
                 Id = techPartnerUser.Id,
-                FirstName = techPartnerUser.FirstName,
-                Surname = techPartnerUser.Surname,
                 ExistingPhotoPath = techPartnerUser.PhotoPath,
                 PhoneNumber = techPartnerUser.PhoneNumber,
                 Email = techPartnerUser.Email,
@@ -344,8 +342,6 @@ public class AdministrationController(IAdminService service,
             var userDetailsViewModel = new UserDetailsViewModel
             {
                 Id = customerUser.Id,
-                FirstName = customerUser.FirstName,
-                Surname = customerUser.Surname,
                 ExistingPhotoPath = customerUser.PhotoPath,
                 PhoneNumber = customerUser.PhoneNumber,
                 Email = customerUser.Email,
@@ -367,7 +363,7 @@ public class AdministrationController(IAdminService service,
         PageHeader = "Edit User";
 
         var userDropdownData = await service.GetUserDropdownValues(true);
-        ViewBag.LineManagers = new SelectList(userDropdownData?.LineManagers, "Id", "FullName");
+        //ViewBag.LineManagers = new SelectList(userDropdownData?.LineManagers, "Id", "FullName");
         ViewBag.OfficeLocations = new SelectList(userDropdownData?.OfficeLocations, "Id", "StateName");
         ViewBag.UserCategories = new SelectList(userDropdownData?.UserCategories, "Id","CategoryOfApplicationUser");
 
@@ -387,7 +383,7 @@ public class AdministrationController(IAdminService service,
             var model = new EditEmployeeViewModel
             {
                 Id = employeeUser.Id,
-                GenderId = employeeUser.GenderId,
+                Gender = employeeUser.Gender,
                 AlternateNumber = employeeUser.AlternateNumber,
                 ExistingPhotoPath = employeeUser.PhotoPath,
                 OnboardingDate = employeeUser.OnboardingDate,
@@ -425,7 +421,7 @@ public class AdministrationController(IAdminService service,
             if (ModelState.IsValid)
             {
                 employeeUser.Id = model.Id;
-                employeeUser.GenderId = model.GenderId;
+                employeeUser.Gender = model.Gender;
                 employeeUser.PhotoPath = model.ExistingPhotoPath;
                 employeeUser.AlternateNumber = model.AlternateNumber;
                 employeeUser.LineManagerId = model.LineManager;
@@ -521,7 +517,10 @@ public class AdministrationController(IAdminService service,
 
         var user = await service.GetUserAsync(userId);
 
-        PageHeader = $"Roles for {user.FirstName}";
+        //PageHeader = $"Roles for {user}";
+        PageHeader = user is Employee ?
+            $"Roles for {user.Email}" ://CHANGE TO FIRST NAME
+            $"Roles for {user.Email}";
 
         if (user == null)
         {
@@ -668,9 +667,7 @@ public class AdministrationController(IAdminService service,
         {
             { "", "Search Filter" },
             { nameof(ApplicationUser.Email), "Email" },
-            { nameof(ApplicationUser.FirstName), "First Name" },
             { nameof(ApplicationUser.PhoneNumber), "Phone Number" },
-            { nameof(ApplicationUser.Surname), "Surname" },
             { nameof(ApplicationUser.UserCategory.CategoryOfApplicationUser), "User Category" }
         };
 

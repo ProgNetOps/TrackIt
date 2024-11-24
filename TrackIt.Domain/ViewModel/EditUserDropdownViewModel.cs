@@ -15,6 +15,6 @@ public class EditUserDropdownViewModel
         UserCategories = [];
     }
     public IEnumerable<State>? OfficeLocations { get; set; }
-    public IEnumerable<ApplicationUser>? LineManagers { get; set; }
+    public IEnumerable<Employee>? LineManagers { get; set; }
     public IEnumerable<UserCategory> UserCategories { get; set; }
 }
