@@ -4,8 +4,10 @@
 	// This value will be retrieved from the parent views or the defaults or default value will be used if null
 	Guid id = ViewBag.EditId == null ? "" : ViewBag.EditId;
 	string actionName = ViewBag.ActionName == null ? "Edit" : ViewBag.ActionName;
+	string toolTipText = ViewBag.ToolTipText == null ? string.Empty : ViewBag.ToolTipText;
 }
 
 <a asp-controller="@Model" asp-action="@actionName" asp-route-id="@id" class="fixed-button" style="font-size:calc(1.5rem + 2vw)">
 	<i class="bi bi-pencil-square"></i>
+	<span class="tooltiptext">@toolTipText</span>
 </a>

@@ -15,14 +15,21 @@ public class IPPoPController(IIPPoPService service, IMapper mapper) : Controller
    private int pageSize = 40;
 
    [ViewData]
-   public string Title { get; set; } = string.Empty;
-   [ViewData]
-   public string PageHeader { get; set; } = string.Empty;
+   public string? Title { get; set; }
 
-   public async Task<IActionResult> Index(string? searchBy, string? searchString, string sortBy, int? pageNumber)
+   [ViewData]
+   public string? PageHeader { get; set; }
+
+   [ViewData]
+   public string? ToolTipText { get; set; }
+
+
+
+    public async Task<IActionResult> Index(string? searchBy, string? searchString, string sortBy, int? pageNumber)
    {
         Title = "IP PoPs";
         PageHeader = "IP PoPs";
+        ToolTipText = "Add New IP PoP";
 
         //SEARCH
         ViewBag.SearchFields = new Dictionary<string, string>()

@@ -54,6 +54,7 @@ public class RegisterViewModel
 
     
     [Display(Name = "Profile Picture")]
+    [PermittedFileExtensions(["jpeg", "png"],ErrorMessage ="Unsupported file format")]
     public IFormFile? Photo { get; set; }
 
     

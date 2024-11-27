@@ -16,12 +16,16 @@ public class DCNRouterController(IDCNRouterService service, IMapper mapper) : Co
     [ViewData]
     public string PageHeader { get; set; } = string.Empty;
 
+    [ViewData]
+    public string? ToolTipText { get; set; }
+
 
     [HttpGet]
     public async Task<IActionResult> Index(string? searchBy, string? searchString, string sortBy, int? pageNumber)
     {
         Title = "DCN Router";
         PageHeader = "DCN Routers";
+        ToolTipText = "Add New Router";
 
         //SEARCH
         ViewBag.SearchFields = new Dictionary<string, string>()

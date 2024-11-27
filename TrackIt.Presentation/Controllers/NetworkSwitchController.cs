@@ -9,13 +9,18 @@ namespace TrackIt.Presentation.Controllers;
 
 public class NetworkSwitchController(INetworkSwitchService service, IMapper mapper) : Controller
 {
+
     //The maximun number of BTS returned per page
     private int pageSize = 40;
 
     [ViewData]
-    public string Title { get; set; } = string.Empty;
+    public string? Title { get; set; }
+
     [ViewData]
-    public string PageHeader { get; set; } = string.Empty;
+    public string? PageHeader { get; set; }
+
+    [ViewData]
+    public string? ToolTipText { get; set; }
 
 
     [HttpGet]
@@ -23,6 +28,7 @@ public class NetworkSwitchController(INetworkSwitchService service, IMapper mapp
     {
         Title = "Network Switches";
         PageHeader = "Network Switches";
+        ToolTipText = "Add New Switch";
 
         //SEARCH
         ViewBag.SearchFields = new Dictionary<string, string>()
@@ -61,6 +67,8 @@ public class NetworkSwitchController(INetworkSwitchService service, IMapper mapp
     public async Task<IActionResult> Details(Guid id)
     {
         Title = "Switch";
+        ToolTipText = "Edit Switch";
+
 
         var SwitchDetails = await service.GetByIdAsync(id);
         PageHeader = SwitchDetails.SwitchName.ToUpper();

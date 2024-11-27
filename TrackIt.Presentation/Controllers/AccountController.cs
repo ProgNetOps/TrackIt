@@ -238,4 +238,48 @@ public class AccountController(IAccountService service,
     }
 
 
+    [HttpGet]
+    [AllowAnonymous]
+    public IActionResult ResetPassword(string? token, string? email)
+    {
+        if(token is null || email is null)
+        {
+            ModelState.AddModelError("", "invalid password reset token");
+        }
+        return View();
+    }
+
+
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = await userManager.FindByEmailAsync(model.Email);
+
+            if(user is not null)
+            {
+                var result = await userManager.ResetPasswordAsync(user, model.Token, model.Password);
+                if (result.Succeeded)
+                {
+                    return View("ResetPasswordConfirmation");
+                }
+                else
+                {
+                    foreach(var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+
+            return View("ResetPasswordConfirmation");
+        }
+        else
+        {
+            return View(model);
+        }
+    }
+
 }

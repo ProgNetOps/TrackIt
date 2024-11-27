@@ -15,9 +15,13 @@ public class CircuitController(ICircuitService service, IMapper mapper) : Contro
     private int pageSize = 40;
 
     [ViewData]
-    public string Title { get; set; } = string.Empty;
+    public string? Title { get; set; }
+
     [ViewData]
-    public string PageHeader { get; set; } = string.Empty;
+    public string? PageHeader { get; set; }
+
+    [ViewData]
+    public string? ToolTipText { get; set; }
 
     [HttpGet]
     public async Task<IActionResult> Index(string? searchBy, string? searchString, string sortBy, int? pageNumber)

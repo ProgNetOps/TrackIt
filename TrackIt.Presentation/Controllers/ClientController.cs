@@ -16,18 +16,25 @@ namespace TrackIt.Presentation.Controllers
 
         [ViewData]
         public string Title { get; set; } = string.Empty;
+
 		[ViewData]
 		public string PageHeader { get; set; } = string.Empty;
+
 		[ViewData]
 		public string ActionName { get; set; } = string.Empty;
 
+        [ViewData]
+        public string ToolTipText { get; set; } = string.Empty;
 
-		[HttpGet]
+
+
+        [HttpGet]
         public async Task<IActionResult> Index(string? searchBy, string? searchString, string sortBy, int? pageNumber)
         {
             Title = "Clients";
-            PageHeader = "Clients";
+            PageHeader = "Client Management";
             ActionName = "Create";
+            ToolTipText = "Add New Client";
 
             ViewBag.SearchFields = new Dictionary<string, string>()
                 {
@@ -62,6 +69,7 @@ namespace TrackIt.Presentation.Controllers
         {
             Title = "Client Details";
             ActionName = "CreateService";
+            ToolTipText = "Add New Service";
 
             var clientDetails = await service.GetByIdAsync(id);
             PageHeader = clientDetails?.ClientName;

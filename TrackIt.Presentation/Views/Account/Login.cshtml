@@ -29,14 +29,17 @@
                 <label class="Loginlabel" for="chk" aria-hidden="true">Log In</label>
                 <input asp-for="Email" class="Logininput" placeholder="Official Email">
                 <span asp-validation-for="Email" class="text-danger"></span>
+
                 <input asp-for="Password" class="Logininput" placeholder="Password">
                 <span asp-validation-for="Password" class="text-danger"></span>
+
                 <div class="form-group form-check text-center">
                     <label class="form-check-label text-white">
                         <input asp-for="RememberMe" class=" form-check-input" />
                         @Html.DisplayNameFor(model => model.RememberMe)
                     </label>
                 </div>
+
                 <button type="submit" class="Loginbutton">Login</button>
 
                 <p>Not registered? <a asp-action="Register" style="color:greenyellow;">Sign Up</a> </p>

@@ -19,9 +19,13 @@ public class BTSController(IBaseStationService service) : Controller
     private int pageSize = 40;
 
     [ViewData]
-    public string Title { get; set; } = string.Empty;
+    public string? Title { get; set; } = string.Empty;
+
     [ViewData]
-    public string PageHeader { get; set; } = string.Empty;
+    public string? PageHeader { get; set; } = string.Empty;
+
+    [ViewData]
+    public string? ToolTipText { get; set; }
 
 
     [HttpGet]
@@ -29,6 +33,7 @@ public class BTSController(IBaseStationService service) : Controller
     {
         Title = "Base Stations";
         PageHeader = "Base Stations";
+        ToolTipText = "Add New BTS";
 
         //SEARCH
         ViewBag.SearchFields = new Dictionary<string, string>()

@@ -10,7 +10,6 @@ namespace TrackIt.Presentation.Controllers
 {
     public class TicketingSystemController(ITicketService service, IMapper mapper) : Controller
     {
-
         private int pageSize = 40;
 
         [ViewData]
@@ -48,6 +47,7 @@ namespace TrackIt.Presentation.Controllers
 
             return View(new PagedList<Ticket>(tickets.ToList(), count, pageNumber.Value, pageSize));
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Create(Client client)

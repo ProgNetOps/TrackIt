@@ -25,16 +25,20 @@ public class AdministrationController(IAdminService service,
     IWebHostEnvironment webHostEnvironment) : Controller
 {
     [ViewData]
-    public string Title { get; set; } = string.Empty;
+    public string? Title { get; set; } 
+
 	[ViewData]
-	public string PageHeader { get; set; } = string.Empty;
+	public string? PageHeader { get; set; } 
+
     [ViewData]
-    public string ActionName { get; set; } = string.Empty;
+    public string? ActionName { get; set; } 
+
+    [ViewData]
+    public string? ToolTipText { get; set; }
 
 
     //The maximun number of Users returned per page
     private int pageSize = 40;
-
 
     [HttpGet]
     public async Task<IActionResult> ManageUserClaims(string userId)
@@ -155,6 +159,7 @@ public class AdministrationController(IAdminService service,
 		ActionName = "CreateRole";//string passed to the partial view
 		Title = "All Roles";
         PageHeader = "Access Control (RBAC)";
+        ToolTipText = "Add New Role";
 
         var roles = service.GetAllRoles();
         return View(roles);
@@ -277,6 +282,7 @@ public class AdministrationController(IAdminService service,
         Title = "User details";
         PageHeader = "User Details";
         ActionName = "EditUser";
+        ToolTipText = "Edit User";
 
         var user = await service.GetUserAsync(id);
 
@@ -661,6 +667,7 @@ public class AdministrationController(IAdminService service,
         Title = "All Users";
         PageHeader = "Registered Users";
         ActionName = "RegisterTP";
+        ToolTipText = "Add 3rd Party";
 
         //SEARCH
         ViewBag.SearchFields = new Dictionary<string, string>()

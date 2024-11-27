@@ -11,17 +11,19 @@ public class Employee:ApplicationUser
     public Guid? UnitId { get; set; }
     [ForeignKey(nameof(UnitId))]
     public Unit? Unit { get; set; }
+
     public string? LineManagerId { get; set; }
     [ForeignKey(nameof(LineManagerId))]
     public Employee? LineManager { get; set; }
+
     [Display(Name = "First Name")]
     [StringLength(20)]
     public string? FirstName { get; set; }
 
     [StringLength(20)]
     public string? Surname { get; set; }
-    public string? FullName => $"{Surname} {FirstName} - {PhoneNumber}";
 
+    public string? FullName => $"{Surname} {FirstName} - {PhoneNumber}";
 
     [DataType(DataType.Date)]
     [Display(Name = "Onboarding Date")]

@@ -21,8 +21,8 @@ public class RegisterEmployeeViewModel: RegisterViewModel
     public Guid? GenderId { get; set; }
 
 
-    //[Required(ErrorMessage = "Profile picture is required")]
-    [PermittedFileExtensions(["jpg", "jpeg", "png"])]
-    [MaximumFileSize(1, ErrorMessage = "Maximum file size is 1Mb")]
-    public IFormFile? Photo { get; set; }
+    ////[Required(ErrorMessage = "Profile picture is required")]
+    //[PermittedFileExtensions([, "jpeg", "png"])]
+    //[MaximumFileSize(1, ErrorMessage = "Maximum file size is 1Mb")]
+    //public IFormFile? Photo { get; set; }
 }
