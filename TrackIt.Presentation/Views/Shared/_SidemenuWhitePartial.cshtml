@@ -5,7 +5,7 @@
     <ul>
 
         @if(signInManager.IsSignedIn(User)){
-            @if (User.IsInRole("Admin"))
+            @if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
             {
                 <li>
                     <a asp-controller="Administration" asp-action="AllRoles">
@@ -15,49 +15,50 @@
                         <span class="text">Access Mgmt.</span>
                     </a>
                 </li>
+                <li>
+                    <a asp-controller="Client" asp-action="Index">
+                        <span class="icon text-white">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </span>
+                        <span class="text">Client Mgmt.</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="IPPoP" asp-action="Index">
+                        <span class="icon text-white">
+                            <i class="fa-brands fa-hubspot"></i>
+                        </span>
+                        <span class="text">IP PoPs</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="NetworkSwitch" asp-action="Index">
+                        <span class="icon text-white">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </span>
+                        <span class="text">Network Switches</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="BTS" asp-action="Index">
+                        <span class="icon text-white">
+                            <i class="fa-solid fa-tower-cell"></i>
+                        </span>
+                        <span class="text">Base Stations</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="DCNRouter" asp-action="Index">
+                        <span class="icon text-white">
+                            <i class="bi bi-router-fill"></i>
+                        </span>
+                        <span class="text">MPLS Routers</span>
+                    </a>
+                </li>
             }            
 
-            <li>
-                <a asp-controller="Client" asp-action="Index">
-                    <span class="icon text-white">
-                        <i class="fa-solid fa-users-gear"></i>
-                    </span>
-                    <span class="text">Client Mgmt.</span>
-                </a>
-            </li>
-
-            <li>
-                <a asp-controller="IPPoP" asp-action="Index">
-                    <span class="icon text-white">
-                        <i class="fa-brands fa-hubspot"></i>
-                    </span>
-                    <span class="text">IP PoPs</span>
-                </a>
-            </li>
-            <li>
-                <a asp-controller="NetworkSwitch" asp-action="Index">
-                    <span class="icon text-white">
-                        <i class="fa-solid fa-network-wired"></i>
-                    </span>
-                    <span class="text">Network Switches</span>
-                </a>
-            </li>
-            <li>
-                <a asp-controller="BTS" asp-action="Index">
-                    <span class="icon text-white">
-                        <i class="fa-solid fa-tower-cell"></i>
-                    </span>
-                    <span class="text">Base Stations</span>
-                </a>
-            </li>
-            <li>
-                <a asp-controller="DCNRouter" asp-action="Index">
-                    <span class="icon text-white">
-                        <i class="bi bi-router-fill"></i>
-                    </span>
-                    <span class="text">MPLS Routers</span>
-                </a>
-            </li>
+            
             <li>
                 <a asp-controller="Administration" asp-action="AllUsers">
                     <span class="icon text-white">
@@ -86,7 +87,7 @@
                 <span class="icon text-white">
                     <i class="bi bi-postage-fill"></i>
                 </span>
-                <span class="text">Ticketing System</span>
+                <span class="text">CRM System</span>
             </a>
         </li>
 

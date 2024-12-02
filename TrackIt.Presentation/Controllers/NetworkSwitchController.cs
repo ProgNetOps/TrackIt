@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TrackIt.Domain;
 using TrackIt.Presentation.Models.DTO;
@@ -7,6 +8,8 @@ using TrackIt.Repository.Services;
 
 namespace TrackIt.Presentation.Controllers;
 
+
+[Authorize(Roles = "Admin,Super Admin")]
 public class NetworkSwitchController(INetworkSwitchService service, IMapper mapper) : Controller
 {
 

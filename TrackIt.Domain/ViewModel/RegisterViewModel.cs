@@ -24,7 +24,6 @@ public class RegisterViewModel
     //[Remote(action: "IsEmailInUse", controller: "Account")]
     [ValidEmailDomain("gloworld.com", ErrorMessage = "Invalid domain name")]
     [EmailDelimiter('.', ErrorMessage = "Missing email delimiter")]
-
     public string Email { get; set; }
 
     [Phone]
@@ -54,7 +53,7 @@ public class RegisterViewModel
 
     
     [Display(Name = "Profile Picture")]
-    [PermittedFileExtensions(["jpeg", "png"],ErrorMessage ="Unsupported file format")]
+    [PermittedFileExtensions([".jpg",".jpeg", ".png"],ErrorMessage =$"File format must be jpg or jpeg or png")]
     public IFormFile? Photo { get; set; }
 
     

@@ -36,24 +36,22 @@
 
             @if (Model.Any() is false)
             {
-                <p class="text-center">Nothing to display</p>
+                <h2 class="text-center text-white">Nothing to display</h2>
             }
             else
             {
                 <section class="album">
                     @foreach (var user in Model)
                     {
-                        @* string photoPath = "~/images/" + (user?.PhotoPath ?? "noimage.png");*@
+                        
                         string? photoPath = null;
 
                         if (user is Employee employee)
                         {
-                            @* if (employee.GenderId.ToString().StartsWith("823")) *@
                             if(employee?.Gender?.Name.ToLower() == "male")
                             {
                                 photoPath = "~/Images/" + (user?.PhotoPath ?? "malestaff.jpg");
                             }
-                            @* else if (employee.GenderId.ToString().StartsWith("B0C")) *@
                             else
                             {
                                 photoPath = "~/Images/" + (user?.PhotoPath ?? "femalestaff.jpg");
@@ -68,18 +66,18 @@
                             <div class="imgBox">
                                 <img src="@photoPath" asp-append-version="true" />
                             </div>
-                            <div class="details">
+                            <div class="details" style="color:black;">
 
                                 @{
                                     string tag = user is Employee staff ?
-                                    $"{staff.Surname} {staff.FirstName}" :
+                                    $"{staff.Surname?.ToUpper()} {staff.FirstName?.ToUpper()}" :
                                     user is TechnologyPartner techPartner ?
                                     $"{techPartner.CompanyName}" :
                                     user is Customer customer ?
                                     $"{customer.CompanyName}" : "";
                                 }
 
-                                <h2>@tag</h2>
+                                <h2 style="font-size:1.5rem;">@tag</h2>
 
                                 <div>
                                     <span>@user.Email</span> <br>
@@ -93,8 +91,12 @@
                                 <a style="width:100%;" class="btn btn-primary" asp-controller="Administration" asp-action="UserDetails" asp-route-id="@user.Id">Details</a>
                             </div>
 
-                            <a style="position: absolute; top:30%; left:50%; transform:translateX(-50%); width:5vw;height:5vw;" asp-controller="Administration" asp-action="EditUser" asp-route-id="@user.Id" class="fixed-button"> <i class="fas fa-pen" id="icon"></i> </a>
 
+                            @if (User.IsInRole("Admin") || User.IsInRole("Super Admin")){
+                                <a style="position: absolute; top:30%; left:50%; transform:translateX(-50%); width:5vw;height:5vw;" asp-controller="Administration" asp-action="EditUser" asp-route-id="@user.Id" class="fixed-button"> <i class="fas fa-pen" id="icon"></i> </a>
+
+                            }
+                            
                         </div>
 
                     }
@@ -105,7 +107,10 @@
 
     </form>
 
-    @await Html.PartialAsync("_CreateNewPartial", "Account")
+    @if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+    {
+        @await Html.PartialAsync("_CreateNewPartial", "Account")
+    }
 
 </section>
 

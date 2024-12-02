@@ -13,6 +13,7 @@ using TrackIt.Repository.Services;
 
 namespace TrackIt.Presentation.Controllers;
 
+[Authorize(Roles = "Admin,Super Admin")]
 public class BTSController(IBaseStationService service) : Controller
 {
     //The maximun number of BTS returned per page

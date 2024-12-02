@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TrackIt.Domain;
 using TrackIt.Presentation.Utilities;
@@ -6,6 +7,7 @@ using TrackIt.Repository.Services;
 
 namespace TrackIt.Presentation.Controllers;
 
+[Authorize(Roles = "Admin,Super Admin")]
 public class DCNRouterController(IDCNRouterService service, IMapper mapper) : Controller
 {
     //The maximun number of routers returned per page
@@ -23,8 +25,8 @@ public class DCNRouterController(IDCNRouterService service, IMapper mapper) : Co
     [HttpGet]
     public async Task<IActionResult> Index(string? searchBy, string? searchString, string sortBy, int? pageNumber)
     {
-        Title = "DCN Router";
-        PageHeader = "DCN Routers";
+        Title = "MPLS Router";
+        PageHeader = "MPLS Routers";
         ToolTipText = "Add New Router";
 
         //SEARCH

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using TrackIt.Domain;
@@ -8,6 +9,7 @@ using TrackIt.Repository.Services;
 
 namespace TrackIt.Presentation.Controllers;
 
+[Authorize(Roles = "Admin,Super Admin")]
 public class IPPoPController(IIPPoPService service, IMapper mapper) : Controller
 {
 

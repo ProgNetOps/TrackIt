@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TrackIt.Domain;
@@ -9,6 +10,7 @@ using TrackIt.Repository.Services;
 
 namespace TrackIt.Presentation.Controllers;
 
+[Authorize(Roles = "Admin,Super Admin")]
 public class CircuitController(ICircuitService service, IMapper mapper) : Controller
 {
     //The maximun number of Circuits returned per page

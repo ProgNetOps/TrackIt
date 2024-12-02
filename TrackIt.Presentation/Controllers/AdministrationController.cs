@@ -664,8 +664,8 @@ public class AdministrationController(IAdminService service,
     [HttpGet]
     public async Task<IActionResult> AllUsers(string? searchBy, string? searchString, string sortBy, int? pageNumber)
     {
-        Title = "All Users";
-        PageHeader = "Registered Users";
+        Title = "Staff";
+        PageHeader = "Staff";
         ActionName = "RegisterTP";
         ToolTipText = "Add 3rd Party";
 

@@ -6,7 +6,8 @@
     <ul>
 
         @if (signInManager.IsSignedIn(User)){
-            @if (User.IsInRole("Admin")){
+            @if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
+            {
                 <li>
                     <a asp-controller="Administration" asp-action="AllRoles">
                         <span class="icon">
@@ -15,7 +16,6 @@
                         <span class="text">Access Mgmt.</span>
                     </a>
                 </li>
-            }
                 <li>
                     <a asp-controller="Client" asp-action="Index">
                         <span class="icon">
@@ -59,6 +59,8 @@
                         <span class="text">MPLS Routers</span>
                     </a>
                 </li>
+            }
+                
 
                 <li>
                     <a asp-controller="Administration" asp-action="AllUsers">
@@ -84,7 +86,7 @@
                 <span class="icon">
                     <i class="bi bi-postage-fill"></i>
                 </span>
-                <span class="text">Ticketing System</span>
+                <span class="text">CRM System</span>
             </a>
             </li>
 

@@ -19,7 +19,7 @@
             <i class="uil uil-estate nav__icon"></i> Home
         </a>
     </li>
-    @if(User.IsInRole("Admin"))
+    @if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
     {
         <li class="nav__item">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown">
@@ -28,7 +28,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 @* To manage users and roles *@
                 <a class="dropdown-item nav__link " asp-controller="Administration" asp-action="AllRoles">
-                    User Roles
+                    Access Control (RBAC)
                 </a>
                 <a class="dropdown-item nav__link " asp-controller="Administration" asp-action="AllUsers">
                     Registered Users
@@ -63,10 +63,12 @@
             <i class="uil uil-user nav__icon"></i> Ticketing System
         </a>
     </li>
+
     <li class="nav__item">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown">
             @userTitle
         </a>
+
         <div class="dropdown-menu " aria-labelledby="navbarDropdown">
             <a class="dropdown-item nav__link " asp-controller="Administration" asp-action="UserDetails" asp-route-id="@userId">
                 View Profile
@@ -74,10 +76,14 @@
             <a class="dropdown-item nav__link " asp-controller="Administration" asp-action="EditUser" asp-route-id="@userId">
                 Edit Profile
             </a>
+            <a class="dropdown-item nav__link " href="#">
+                Change Password
+            </a>
             <a class="dropdown-item text-danger" asp-controller="Account" asp-action="Logout">
                 Logout
             </a>
         </div>
+
     </li>
 }
 else
