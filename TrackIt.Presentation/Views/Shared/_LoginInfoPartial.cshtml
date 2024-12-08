@@ -15,41 +15,43 @@
 @if (signInManager.IsSignedIn(User))
 {
     <li class="nav__item">
-        <a asp-controller="Home" asp-action="Index" class="nav__link nav-link active-link">
+        <a asp-controller="Home" asp-action="Index" class="nav__link nav-link @Html.IsActive("Home","Index")">
             <i class="uil uil-estate nav__icon"></i> Home
         </a>
     </li>
     @if (User.IsInRole("Admin") || User.IsInRole("Super Admin"))
     {
+
+
         <li class="nav__item">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown">
                 Manage
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 @* To manage users and roles *@
-                <a class="dropdown-item nav__link " asp-controller="Administration" asp-action="AllRoles">
+                <a class="dropdown-item nav__link @Html.IsActive("Administration","AllRoles")" asp-controller="Administration" asp-action="AllRoles">
                     Access Control (RBAC)
                 </a>
-                <a class="dropdown-item nav__link " asp-controller="Administration" asp-action="AllUsers">
+                <a class="dropdown-item nav__link @Html.IsActive("Administration","AllUsers")" asp-controller="Administration" asp-action="AllUsers">
                     Registered Users
                 </a>
                 @* To manage users and roles *@
-                <a class="dropdown-item nav__link " asp-controller="Client" asp-action="Index">
+                <a class="dropdown-item nav__link @Html.IsActive("Client","Index")" asp-controller="Client" asp-action="Index">
                     All Clients
                 </a>
-                <a class="dropdown-item nav__link " asp-controller="circuit" asp-action="Index">
+                <a class="dropdown-item nav__link @Html.IsActive("Circuit","Index")" asp-controller="circuit" asp-action="Index">
                     All Services
                 </a>
-                <a class="dropdown-item nav__link " asp-controller="BTS" asp-action="Index">
+                <a class="dropdown-item nav__link @Html.IsActive("BTS","Index")" asp-controller="BTS" asp-action="Index">
                     Base Transciever Stations
                 </a>
-                <a class="dropdown-item nav__link " asp-controller="NetworkSwitch" asp-action="Index">
+                <a class="dropdown-item nav__link @Html.IsActive("NetworkSwitch","Index")" asp-controller="NetworkSwitch" asp-action="Index">
                     Enterprise Switches
                 </a>
-                <a class="dropdown-item nav__link " asp-controller="IPPoP" asp-action="Index">
+                <a class="dropdown-item nav__link @Html.IsActive("IPPoP","Index")" asp-controller="IPPoP" asp-action="Index">
                     IP PoPS
                 </a>
-                <a class="dropdown-item nav__link " asp-controller="DCNRouter" asp-action="Index">
+                <a class="dropdown-item nav__link @Html.IsActive("DCNRouter","Index")" asp-controller="DCNRouter" asp-action="Index">
                     DCN Routers
                 </a>
             </div>
@@ -59,7 +61,7 @@
 
 
     <li class="nav__item">
-        <a asp-controller="TicketingSystem" asp-action="Index" class="nav__link nav-link">
+        <a asp-controller="TicketingSystem" asp-action="Index" class="nav__link @Html.IsActive("TicketingSystem","Index")">
             <i class="uil uil-user nav__icon"></i> Ticketing System
         </a>
     </li>
@@ -70,16 +72,16 @@
         </a>
 
         <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-            <a class="dropdown-item nav__link " asp-controller="Administration" asp-action="UserDetails" asp-route-id="@userId">
+            <a class="dropdown-item nav__link @Html.IsActive("Administration","UserDetails")" asp-controller="Administration" asp-action="UserDetails" asp-route-id="@userId">
                 View Profile
             </a>
-            <a class="dropdown-item nav__link " asp-controller="Administration" asp-action="EditUser" asp-route-id="@userId">
+            <a class="dropdown-item nav__link @Html.IsActive("Administration","EditUser")" asp-controller="Administration" asp-action="EditUser" asp-route-id="@userId">
                 Edit Profile
             </a>
             <a class="dropdown-item nav__link " href="#">
                 Change Password
             </a>
-            <a class="dropdown-item text-danger" asp-controller="Account" asp-action="Logout">
+            <a class="dropdown-item text-danger @Html.IsActive("Account","Logout")" asp-controller="Account" asp-action="Logout">
                 Logout
             </a>
         </div>
@@ -89,7 +91,7 @@
 else
 {
     <li class="nav__item">
-        <a href="#home" class="nav__link active-link">
+        <a href="#home" class="nav__link">
             <i class="uil uil-estate nav__icon"></i> Home
         </a>
     </li>
@@ -99,12 +101,12 @@ else
         </a>
     </li>
     <li class="nav__item">
-        <a href="#services" class="nav__link">
+        <a href="#services" class="nav__link ">
             <i class="uil uil-briefcase-alt nav__icon"></i> Services
         </a>
     </li>
     <li class="nav__item">
-        <a href="#contact" class="nav__link">
+        <a href="#contact" class="nav__link @Html.IsActive("Home","Index")" id="contactus">
             <i class="uil uil-message nav__icon"></i> Contact Us
         </a>
     </li>
