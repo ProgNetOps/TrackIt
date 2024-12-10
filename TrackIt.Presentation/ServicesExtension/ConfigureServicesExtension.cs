@@ -63,8 +63,7 @@ namespace TrackIt.Presentation.ServicesExtension
 
             //Add Administration Service
             services.AddScoped<IAdminService, AdminService>();
-
-            
+                        
             //Add Ticket Service
             services.AddScoped<ITicketService, TicketService>();
 
