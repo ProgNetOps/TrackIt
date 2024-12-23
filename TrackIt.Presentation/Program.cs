@@ -2,19 +2,18 @@ using TrackIt.Presentation.ServicesExtension;
 using NLog;
 using NLog.Web;
 
-
 //Early init of NLog to allow startup and exception logging, before host is built
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("init main");
 
 try
-{
-    
+{    
     var builder = WebApplication.CreateBuilder(args);
 
     //NLog: Setup NLog for Dependency injection
 
     builder.Logging.ClearProviders();
+ 
     builder.Host.UseNLog();
 
     builder.Services.ConfigureServices(builder.Configuration);
@@ -41,8 +40,8 @@ try
 
     Rotativa.AspNetCore.RotativaConfiguration.Setup("wwwroot", wkhtmltopdfRelativePath: "Rotativa");
 
-
     app.UseHttpsRedirection();
+
     app.UseStaticFiles();
 
     app.UseRouting();
@@ -59,7 +58,6 @@ try
 }
 catch (Exception exception)
 {
-
     // NLog: catch setup errors
     logger.Error(exception, "Stopped program because of exception");
 
@@ -70,5 +68,3 @@ finally
     // Ensure to flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
     NLog.LogManager.Shutdown();
 }
-
-
