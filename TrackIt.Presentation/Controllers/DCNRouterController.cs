@@ -15,6 +15,7 @@ public class DCNRouterController(IDCNRouterService service, IMapper mapper) : Co
 
     [ViewData]
     public string Title { get; set; } = string.Empty;
+
     [ViewData]
     public string PageHeader { get; set; } = string.Empty;
 
