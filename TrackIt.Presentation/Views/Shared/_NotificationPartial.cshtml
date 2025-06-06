@@ -1,20 +1,18 @@
-﻿
-    @if (TempData["Success"] is not null)
-    {
-        <script type="text/javascript">
-            toastr.success('@TempData["Success"]');
-        </script>
-    }            
-    @if (TempData["Failure"] is not null)
-    {
-    <script type="text/javascript">
-        toastr.error('@TempData["Failure"]');
-    </script>
-    }
-
-
-
-@section Scripts {
-    <script src="~/lib/jquery/jquery.min.js"></script>
+﻿@if (TempData["success"] is not null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script type="text/javascript">
+        toastr.success("@TempData["success"]");
+    </script>
+}
+
+@if (TempData["error"] is not null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.error("@TempData["error"]")
+    </script>
 }

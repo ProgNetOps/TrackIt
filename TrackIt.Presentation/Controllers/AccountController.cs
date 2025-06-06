@@ -151,22 +151,28 @@ public class AccountController(IAccountService service,
             {
                 if(string.IsNullOrEmpty(returnUrl) is false)
                 {
+                    TempData["success"] = "Login Successful";//Put the TempData before a redirect
                     return LocalRedirect(returnUrl);
                 }
                 else
                 {
                     //return RedirectToAction("Welcome", "Home");
+
+                    TempData["success"] = "Login Successful";//Put the TempData before a redirect
                     return RedirectToAction("Index", "Home");
                 }
             }
             else
             {
                 ModelState.AddModelError("", "Invalid credentials");
+
+                TempData["error"] = "Invalid login credentials, try again please";//Put the TempData before a redirect
                 return View(loginModel);
             }
         }
         else
         {
+            TempData["error"] = "Invalid login credentials, try again please";//Put the TempData before a redirect
             return View(loginModel);
         }
     }
@@ -175,7 +181,9 @@ public class AccountController(IAccountService service,
     public async Task<IActionResult> Logout()
     {
 
-        await service.SignOutAsync();
+        await service.SignOutAsync(); 
+
+        TempData["success"] = "Logged out successfully";//Put the TempData before a redirect
         return RedirectToAction(nameof(Index), "Home");
     }
 
