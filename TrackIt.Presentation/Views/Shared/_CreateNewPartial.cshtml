@@ -1,15 +1,13 @@
-﻿@* A view model with bootstrap attributes for modal pop up *@
-
-@model string
-
+﻿
 @{
 	// This value will be retrieved from the parent views and defaults to CREATE if it is null
 	string actionName = ViewBag.ActionName == null ? "Create" : ViewBag.ActionName;
-	string toolTipText = ViewBag.ToolTipText == null ? string.Empty : ViewBag.ToolTipText;
+	string toolTipText = ViewBag.ToolTipText == null ? "Add New" : ViewBag.ToolTipText;
+	string iconsClass = "bi bi-plus";
 }
 
 <a asp-controller="@Model" asp-action="@actionName" class="fixed-button">
-	<i class="bi bi-plus"></i>
+	<i class="@iconsClass"></i>
 	<span class="tooltiptext">@toolTipText</span>
 </a>
 
