@@ -1,0 +1,43 @@
+﻿@{
+	// This value will be retrieved from the parent views and defaults to CREATE if it is null
+
+	string? actionName, toolTipText, iconsClass = null;
+
+	string crudActionType = ViewBag.CrudActionType;
+
+	if(crudActionType == "Create")
+	{
+		actionName = ViewBag.ActionName == null ? 
+		"Create" : 
+		ViewBag.ActionName;
+
+		toolTipText = ViewBag.ToolTipText == null ? 
+		"Add New" : 
+		ViewBag.ToolTipText;
+
+		iconsClass = "bi bi-plus";
+
+	}
+	else if(crudActionType == "Edit")
+	{
+		actionName = ViewBag.ActionName == null ?
+		"Edit" : 
+		ViewBag.ActionName;
+
+		toolTipText = ViewBag.ToolTipText == null ?
+		"Edit" : 
+		ViewBag.ToolTipText;
+
+		iconsClass = "bi bi-pencil-square";
+	}
+	else
+	{
+		actionName = toolTipText = iconsClass = null;
+	}
+}
+
+	<a asp-controller="@Model" asp-action="@actionName" class="fixed-button">
+		<i class="@iconsClass"></i>
+		<span class="tooltiptext">@toolTipText</span>
+	</a>
+

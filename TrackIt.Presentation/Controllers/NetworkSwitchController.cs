@@ -25,6 +25,11 @@ public class NetworkSwitchController(INetworkSwitchService service, IMapper mapp
     [ViewData]
     public string? ToolTipText { get; set; }
 
+    [ViewData]
+    public string? ActionName { get; set; }
+
+    [ViewData]
+    public string? CrudActionType { get; set; }
 
     [HttpGet]
     public async Task<IActionResult> Index(string? searchBy, string? searchString, string sortBy, int? pageNumber)
@@ -32,6 +37,7 @@ public class NetworkSwitchController(INetworkSwitchService service, IMapper mapp
         Title = "Network Switches";
         PageHeader = "Network Switches";
         ToolTipText = "Add New Switch";
+        CrudActionType = "Create";
 
         //SEARCH
         ViewBag.SearchFields = new Dictionary<string, string>()

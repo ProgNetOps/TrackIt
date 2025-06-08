@@ -31,10 +31,13 @@ public class AdministrationController(IAdminService service,
 	public string? PageHeader { get; set; } 
 
     [ViewData]
-    public string? ActionName { get; set; } 
+    public string? ToolTipText { get; set; }
 
     [ViewData]
-    public string? ToolTipText { get; set; }
+    public string? ActionName { get; set; }
+
+    [ViewData]
+    public string? CrudActionType { get; set; }
 
 
     //The maximun number of Users returned per page
@@ -160,6 +163,7 @@ public class AdministrationController(IAdminService service,
 		Title = "All Roles";
         PageHeader = "Access Control (RBAC)";
         ToolTipText = "Add New Role";
+        CrudActionType = "Create";
 
         var roles = service.GetAllRoles();
         return View(roles);
@@ -283,6 +287,7 @@ public class AdministrationController(IAdminService service,
         PageHeader = "User Details";
         ActionName = "EditUser";
         ToolTipText = "Edit User";
+        CrudActionType = "Edit";
 
         var user = await service.GetUserAsync(id);
 
