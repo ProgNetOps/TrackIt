@@ -12,7 +12,6 @@
     <Content Remove="Views\Administration\UserDetails.cshtml" />
     <Content Remove="Views\Circuit\Edit.cshtml" />
     <Content Remove="Views\Client\Create.cshtml" />
-    <Content Remove="Views\Home\Welcome.cshtml" />
     <Content Remove="Views\Shared\_ITSHeaderPartial.cshtml" />
   </ItemGroup>
 
@@ -42,7 +41,6 @@
     <None Include="Views\Administration\UserDetails.cshtml" />
     <None Include="Views\Circuit\Edit.cshtml" />
     <None Include="Views\Client\Create.cshtml" />
-    <None Include="Views\Home\Welcome.cshtml" />
     <None Include="Views\Shared\_ITSHeaderPartial.cshtml" />
     <None Include="Views\Shared\_ResourceViewLayout.cshtml" />
   </ItemGroup>
@@ -56,17 +54,12 @@
     <_ContentIncludedByDefault Remove="Views\Administration\EmployeeDetails.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Circuit\Edit.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Client\Create.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Home\Welcome.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Shared\_ITSHeaderPartial.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Security\" />
     <Folder Include="wwwroot\images\Contact\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Home\Welcome.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
