@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TrackIt.Domain.Contract;
 
@@ -12,7 +11,7 @@ namespace TrackIt.Domain;
 public class BTS : IEntityBase
 {
 
-    public string? _coordinates;
+    private string? _coordinates;
 
     #region Properties
     [Key]
@@ -82,6 +81,7 @@ public class BTS : IEntityBase
         {
             int degrees;
             double minutes, seconds;
+
             // set decimal_degrees value here
             if (Latitude.Value.ToString().IndexOf('.') != -1)
             {
@@ -114,8 +114,9 @@ public class BTS : IEntityBase
             {
                 longitudeCoord = $"{Latitude.Value}\u00b00'0\"E";
             }
-                            
+
             return $"{latitudeCoord} {longitudeCoord}";
+             
         }
         else
         {

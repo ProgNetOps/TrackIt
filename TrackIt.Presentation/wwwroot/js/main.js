@@ -30,27 +30,27 @@ navLink.forEach((n) => n.addEventListener("click", linkAction));
 
 
 /*==================== SERVICES MODAL ====================*/
-const modalViews = document.querySelectorAll(".services__modal"),
-modalBtns = document.querySelectorAll("span.services__button"),
-modalCloses = document.querySelectorAll(".services__modal-close")
+//const modalViews = document.querySelectorAll(".services__modal"),
+//modalBtns = document.querySelectorAll("span.services__button"),
+//modalCloses = document.querySelectorAll(".services__modal-close")
 
-let modal = function(modalClick){
-  modalViews[modalClick].classList.add("active-modal")
-}
+//let modal = function(modalClick){
+//  modalViews[modalClick].classList.add("active-modal")
+//}
 
-modalBtns.forEach((modalBtns,i) =>{
-  modalBtns.addEventListener("click", () =>{
-    modal(i)
-  })
-})
+//modalBtns.forEach((modalBtns,i) =>{
+//  modalBtns.addEventListener("click", () =>{
+//    modal(i)
+//  })
+//})
 
-modalCloses.forEach((modalClose) =>{
-  modalClose.addEventListener("click", () =>{
-      modalViews.forEach((modalView) =>{
-        modalView.classList.remove("active-modal")
-      })
-  })
-})
+//modalCloses.forEach((modalClose) =>{
+//  modalClose.addEventListener("click", () =>{
+//      modalViews.forEach((modalView) =>{
+//        modalView.classList.remove("active-modal")
+//      })
+//  })
+//})
 
 /*==================== PORTFOLIO SWIPER  ====================*/
 let swiperPortfolio = new Swiper(".portfolio__container",{
