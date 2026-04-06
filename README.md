@@ -1,4 +1,5 @@
 Conceptualized, designed and developed by me.
+
 This is a custom ERP for a telecommunications company that provides internet, PRI, SIP trunking, FTTH and Virtual Private LAN Service (VPLS) connectivity services to corporate entities such as banks (connecting the branches to HQ), medium to large scale businesses etc. 
 
 This software solution is specifically designed for the Enterprise Business Unit of the organization: this department is responsible for  providing and managing internet and leased lines connectivity services to corporate entities; the department has its own set of experienced personnel (sales people, RF transmission engineers, network engineers, project managers, service management professionals etc), last mile fiber equipment and radio frequency equipment.
